@@ -26,14 +26,14 @@ export default class SearchSave extends Component{
                 <Nav variant="pills" className="flex-column">
                     {this.state.Nav.map((item) => (
                         console.log(item),
-                        <Nav.Item><Nav.Link eventKey={"" + item}>{item}</Nav.Link></Nav.Item>))}
+                        <Nav.Item><Nav.Link eventKey={`${item}`}>{item}</Nav.Link></Nav.Item>))}
                 </Nav>
                 </Col>
                 <Col sm={9}>
                 <Tab.Content>
                     {this.state.Nav.map((item) => (
                         console.log(item),
-                        <Tab.Pane eventKey={"" + item}><p>{item}</p></Tab.Pane>
+                        <Tab.Pane eventKey={`${item}`}><p>{item}</p></Tab.Pane>
                     ))}
                 </Tab.Content>
                 </Col>
