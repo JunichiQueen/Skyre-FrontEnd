@@ -4,7 +4,7 @@ import Search from './Search.js';
 import Map from './Map.js';
 import ANPR from './ANPR.js';
 
-export default function ControlledTabs() {
+export default function NavTab() {
     const [key, setKey] = useState('search');
   return (
     <div>
