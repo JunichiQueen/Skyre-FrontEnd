@@ -12,7 +12,7 @@ export default function NavTab() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    }} defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example">
+    }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example">
             <Tab eventKey="search" title="Search">
                 <Search />
             </Tab>

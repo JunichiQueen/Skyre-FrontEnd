@@ -15,14 +15,6 @@ export default class Search extends Component{
         })
     }
     
-    addModal = () => {
-        let newItem = document.createElement("Nav.Item");
-        newItem.setAttribute("id", "NewLink");
-        document.getElementById("Navbutton").appendChild(newItem);
-        let newLink = document.createElement("Nav.Link");
-        newLink.innerHTML = "Tab 3";
-        document.getElementById("NewLink").appendChild(newLink);
-    }
     render(){
         return(
             <div>

@@ -23,7 +23,7 @@ export default class SearchSave extends Component{
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>
                 <Col sm={3}>
-                <Nav id="Navbutton" variant="pills" className="flex-column">
+                <Nav variant="pills" className="flex-column">
                     {this.state.Nav.map((item) => (
                         console.log(item),
                         <Nav.Item><Nav.Link eventKey={"" + item}>{item}</Nav.Link></Nav.Item>))}
