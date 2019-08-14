@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, Nav, Col, Row }  from 'react-bootstrap';
 import SearchSave from './SearchSave';
+import AdvancedSearch from './AdvancedSearch.js';
 
 export default class Search extends Component{
     constructor(){
         super();
         this.state=({
-            showSaver: ""
+            showSaver: "",
+            showAdvanced: ""
         })
     }
     openSaveBar = () => {
@@ -14,10 +16,21 @@ export default class Search extends Component{
             showSaver: !this.state.showSaver
         })
     }
+    openAdvancedSearch = () => {
+        this.setState({
+            showAdvanced: !this.state.showAdvanced
+        })
+    }
     
     render(){
         return(
             <div>
+                <input></input>
+                <button>Search</button>
+                <br></br>
+                <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
+                {this.state.showAdvanced ? <AdvancedSearch /> : null}
+
                 <button style={{
                     display: 'flex',
                     justifyContent: 'left',
