@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 
-import Search from './Search.js';
-// import Individual from './Skyre/Individual.js'
+import Individual from './Individual.js';
 
 export default class ResultList extends Component{
     render(){
@@ -12,7 +11,7 @@ export default class ResultList extends Component{
                 <Table className="text-center" striped>
                     <tbody>
                         {this.props.data.map((item) => (
-                            <tr key={item._id}><td><Search firstname={item.firstname} lastname={item.lastname} address={item.address} /></td></tr>
+                            <tr key={item.citizenId}><td><Individual firstname={item.fornames} lastname={item.surname} address={item.homeAddress} /></td></tr>
                         )
                         )}
                     </tbody>

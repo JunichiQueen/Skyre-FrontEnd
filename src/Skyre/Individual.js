@@ -3,18 +3,18 @@ import {Container, Tab, Tabs, Nav, Col, Row, Modal, Button, ModalBody} from 'rea
 
 
 
-export default function Example() {
+export default function Individual() {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
     return (
-      <div >
+      <div>
           
-         {/* <p>{this.props.firstname}</p>
+         <p>{this.props.firstname}</p>
          <p>{this.props.lastname}</p>
-         <p>{this.props.address}</p>  */}
+         <p>{this.props.address}</p>  
         <Button variant="primary" onClick={handleShow}>
         More details
       </Button>

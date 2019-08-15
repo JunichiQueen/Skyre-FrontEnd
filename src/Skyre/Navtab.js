@@ -13,9 +13,13 @@ export default class NavTab extends Component {
         })
     }
 
-    getData = () => {
+    getData = (e) => {
+        e.preventDefault();
+        let entry = {
+            fornames: e.target[0].value
+        }
         axios
-        .get("URL").then(response => {
+        .get("http://localhost:8081/Citizen/getCitizens", entry).then(response => {
             this.setState({
                 data: response.data
             })
@@ -32,7 +36,7 @@ export default class NavTab extends Component {
                 justifyContent: 'center',
             }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example">
                     <Tab eventKey="search" title="Search">
-                        <Search getAll={this.getData}/>
+                        <Search getAll={this.getData} data={this.state.data}/>
                     </Tab>
                     <Tab eventKey="map" title="Map">
                         <Map />
