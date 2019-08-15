@@ -13,6 +13,7 @@ export default class Search extends Component{
             showAdvanced: ""
         })
     }
+    
     openSaveBar = () => {
         this.setState({
             showSaver: !this.state.showSaver
