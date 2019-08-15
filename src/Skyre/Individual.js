@@ -38,10 +38,10 @@ export default function Individual (props) {
             
         <Modal.Body>
             <Modal.Title>Citizen Id:</Modal.Title>
-        <ModalBody>{props.citizenId}</ModalBody>
+            <ModalBody>{props.citizenId}</ModalBody>
         </Modal.Body>    
         <Modal.Body>
-        <Modal.Title>Name:</Modal.Title>
+            <Modal.Title>Name:</Modal.Title>
             <ModalBody>{props.firstname + " "}{props.lastname}</ModalBody>
         </Modal.Body>
         <Modal.Body>
