@@ -11,10 +11,13 @@ export default function Individual (props) {
   
     return (
       <div>
-          
-        <p>{props.firstname}</p>
-        <p>{props.lastname}</p>
-        <p>{props.address}</p>   
+
+        <p>{props.citizenId}</p>  
+        <p>{props.firstname + " "}{props.lastname}</p>
+        <p>{props.address}</p>
+        <p>{props.sex}</p>  
+        
+
         <Button variant="primary" onClick={handleShow}>
         More details
       </Button>
@@ -32,23 +35,28 @@ export default function Individual (props) {
     // }}
         eventKey="Biography" title="Biography">
      
-    <Modal.Body>
-        
-           <Modal.Title>Name:</Modal.Title>
-            <ModalBody>Josh</ModalBody>
+        <Modal.Body>
+        <Modal.Title>Name:</Modal.Title>
+            <ModalBody>{props.firstname + " "}{props.lastname}</ModalBody>
         </Modal.Body>
         <Modal.Body>
             <Modal.Title>Address:</Modal.Title>
-            <ModalBody>123 Fake street</ModalBody>
+            <ModalBody>{props.address}</ModalBody>
+        </Modal.Body>
+        <Modal.Body>
+            <Modal.Title>Sex:</Modal.Title>
+            <ModalBody>{props.sex}</ModalBody>
         </Modal.Body>
         <Modal.Body>
             <Modal.Title>Place of birth: </Modal.Title>
-            <ModalBody>India</ModalBody>
+            <ModalBody>{props.placeOfBirth}</ModalBody>
         </Modal.Body>
         <Modal.Body>
             <Modal.Title>Date of birth:</Modal.Title>
-            <ModalBody>03/01/1994</ModalBody>
+            <ModalBody>{props.dateOfBirth}</ModalBody>
         </Modal.Body>
+
+    
         
     </Tab>
     <Tab eventKey="Financial details" title="Financial details">
