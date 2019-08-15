@@ -11,7 +11,11 @@ export default class ResultList extends Component{
                 <Table className="text-center" striped>
                     <tbody>
                         {this.props.data.map((item) => (
-                            <tr key={item.citizenId}><td><Individual firstname={item.fornames} lastname={item.surname} address={item.homeAddress} /></td></tr>
+                            <tr key={item.citizenId}><td><Individual 
+                            firstname={item.forenames} lastname={item.surname} 
+                            address={item.homeAddress} placeOfBirth={item.placeOfBirth} 
+                            dateOfBirth={item.dateOfBirth} sex={item.sex}
+                            citizenId={item.citizenId}/></td></tr>
                         )
                         )}
                     </tbody>
