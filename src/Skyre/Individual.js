@@ -35,7 +35,7 @@ export default function Individual (props) {
     <Modal.Body>
         
            <Modal.Title>Name:</Modal.Title>
-            <ModalBody>Josh</ModalBody>
+            <ModalBody></ModalBody>
         </Modal.Body>
         <Modal.Body>
             <Modal.Title>Address:</Modal.Title>
