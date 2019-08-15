@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Nav, Col, Row }  from 'react-bootstrap';
+import { Tab, Tabs, Nav, Container, Col, Row }  from 'react-bootstrap';
 import SearchSave from './SearchSave';
+import BasicSearch from './BasicSearch.js';
 import AdvancedSearch from './AdvancedSearch.js';
 
 export default class Search extends Component{
@@ -25,17 +26,24 @@ export default class Search extends Component{
     render(){
         return(
             <div>
-                <input></input>
-                <button>Search</button>
-                <br></br>
-                <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
-                {this.state.showAdvanced ? <AdvancedSearch /> : null}
-
-                <button style={{
-                    display: 'flex',
-                    justifyContent: 'left',
-                }} onClick={this.openSaveBar}>OpenSaveBar</button>
-                { this.state.showSaver ? <SearchSave /> : null}
+                <Container>
+                    <Row>
+                        <Col>
+                            <button style={{
+                                display: 'flex',
+                                justifyContent: 'left',
+                            }} onClick={this.openSaveBar}>OpenSaveBar</button>
+                            { this.state.showSaver ? <SearchSave /> : null}
+                        </Col>
+                        <Col>
+                            {this.state.showAdvanced ? <AdvancedSearch /> : <BasicSearch />}
+                            <br></br>
+                            <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
+                        </Col>
+                        <Col>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
 

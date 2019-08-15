@@ -3,20 +3,23 @@ import React from 'react';
 export default function AdvancedSearch(){
     return(
         <div>
-            <p>Citizen ID</p>
-            <input></input>
-            <p>Forename</p>
-            <input></input>
-            <p>Surname</p>
-            <input></input>
-            <p>Address</p>
-            <input></input>
-            <p>Date Of Birth</p>
-            <input></input>
-            <p>Place Of Birth</p>
-            <input></input>
-            <p>Sex</p>
-            <input></input>
+            <form>
+                <p>Citizen ID</p>
+                <input placeholder="citizen id"></input>
+                <p>Forename</p>
+                <input placeholder="forename"></input>
+                <p>Surname</p>
+                <input placeholder="surname"></input>
+                <p>Address</p>
+                <input placeholder="address"></input>
+                <p>Date Of Birth</p>
+                <input placeholder="date of birth"></input>
+                <p>Place Of Birth</p>
+                <input placeholder="place of birth"></input>
+                <p>Sex</p>
+                <input placeholder="sex"></input>
+                <button type="submit">Search</button>
+            </form>
         </div>
     )
 }
