@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function AdvancedSearch(){
+export default function AdvancedSearch (props){
     return(
         <div>
-            <form>
-                <p>Citizen ID</p>
-                <input placeholder="citizen id"></input>
+            <form onSubmit={props.getAdvanced}>
                 <p>Forename</p>
                 <input placeholder="forename"></input>
                 <p>Surname</p>
                 <input placeholder="surname"></input>
+                <p>Citizen ID</p>
+                <input placeholder="citizen id"></input>
                 <p>Address</p>
                 <input placeholder="address"></input>
                 <p>Date Of Birth</p>

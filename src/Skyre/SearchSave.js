@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Nav, Col, Row }  from 'react-bootstrap';
+import { Tab, Nav, Col, Row }  from 'react-bootstrap';
 
 export default class SearchSave extends Component{
     constructor(){

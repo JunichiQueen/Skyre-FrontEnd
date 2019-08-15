@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Nav, Container, Col, Row }  from 'react-bootstrap';
+import { Container, Col, Row }  from 'react-bootstrap';
 import SearchSave from './SearchSave';
 import BasicSearch from './BasicSearch.js';
 import AdvancedSearch from './AdvancedSearch.js';
@@ -27,7 +27,6 @@ export default class Search extends Component{
     render(){
         return(
             <div>
-                {console.log(this.props.getAll)}
                 <Container>
                     <Row>
                         <Col>
@@ -38,7 +37,7 @@ export default class Search extends Component{
                             { this.state.showSaver ? <SearchSave /> : null}
                         </Col>
                         <Col>
-                            {this.state.showAdvanced ? <AdvancedSearch /> : <BasicSearch getAll={this.props.getAll}/>}
+                            {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced}/> : <BasicSearch getBasic={this.props.getBasic}/>}
                             <br></br>
                             <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
                         </Col>

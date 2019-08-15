@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import {Container, Tab, Tabs, Nav, Col, Row, Modal, Button, ModalBody} from 'react-bootstrap';
+import {Tab, Tabs, Modal, Button, ModalBody} from 'react-bootstrap';
 
 
 
-export default function Individual() {
+export default function Individual (props) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -12,9 +12,9 @@ export default function Individual() {
     return (
       <div>
           
-         <p>{this.props.firstname}</p>
-         <p>{this.props.lastname}</p>
-         <p>{this.props.address}</p>  
+        <p>{props.firstname}</p>
+        <p>{props.lastname}</p>
+        <p>{props.address}</p>   
         <Button variant="primary" onClick={handleShow}>
         More details
       </Button>

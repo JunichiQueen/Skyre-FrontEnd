@@ -3,7 +3,7 @@ import React from 'react';
 export default function BasicSearch (props){
     return(
         <div>
-            <form onSubmit={props.getAll}>
+            <form onSubmit={props.getBasic}>
                 <p>Forename</p>
                 <input placeholder="forename"></input>
                 <p>Surname</p>
