@@ -12,10 +12,11 @@ export default function Individual (props) {
     return (
       <div>
 
-        <p>{props.citizenId}</p>  
+        
         <p>{props.firstname + " "}{props.lastname}</p>
         <p>{props.address}</p>
-        <p>{props.sex}</p>  
+        {/* <p>{props.citizenId}</p>   */}
+        
         
 
         <Button variant="primary" onClick={handleShow}>
@@ -34,7 +35,11 @@ export default function Individual (props) {
     //     justifyContent: 'center',
     // }}
         eventKey="Biography" title="Biography">
-     
+            
+        <Modal.Body>
+            <Modal.Title>Citizen Id:</Modal.Title>
+        <ModalBody>{props.citizenId}</ModalBody>
+        </Modal.Body>    
         <Modal.Body>
         <Modal.Title>Name:</Modal.Title>
             <ModalBody>{props.firstname + " "}{props.lastname}</ModalBody>
