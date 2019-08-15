@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Tab, Tabs, Nav, Col, Row, Modal, Button, ModalBody} from 'react-bootstrap';
+import {Container, Tab, Tabs, Nav, Col, Row, Modal, Button, ModalBody} from 'react-bootstrap';
 
 
 
@@ -10,12 +10,19 @@ export default function Example() {
     const handleShow = () => setShow(true);
   
     return (
-      <div>
+      <div >
+          
+         {/* <p>{this.props.firstname}</p>
+         <p>{this.props.lastname}</p>
+         <p>{this.props.address}</p>  */}
         <Button variant="primary" onClick={handleShow}>
         More details
       </Button>
       {/* <Modal.Title>X's record</Modal.Title> */}
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" 
+            show={show} 
+            onHide={handleClose} 
+            dialogClassName="modal-150w">
         <Modal.Header closeButton><Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
     <Tab 
     // style = {{
@@ -25,8 +32,8 @@ export default function Example() {
     // }}
         eventKey="Biography" title="Biography">
      
-    <Modal.Body
-     >
+    <Modal.Body>
+        
            <Modal.Title>Name:</Modal.Title>
             <ModalBody>Josh</ModalBody>
         </Modal.Body>
