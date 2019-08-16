@@ -1,37 +1,47 @@
 import React, { Component } from 'react';
 import { Tab, Nav, Col, Row }  from 'react-bootstrap';
+import _ from 'lodash';
+
+import SearchSaveModal from './SearchSaveModal.js';
 
 export default class SearchSave extends Component{
-    constructor(){
+    constructor(props){
         super();
-        this.state=({
-            Nav : []
-        })
+        this.state={
+            nav: []
+        }
     }
     counter = 1;
 
     addToState = () => {
+        for(let i= 0; i < this.state.nav.length; i++){
+            for (let j= 0; j < this.props.data.length; j++){
+                if(this.state.nav[i].citizenId === this.props.data[j].citizenId){
+                    this.props.data.splice(j,1);
+                } 
+            }
+        }
         this.setState({
-            Nav: this.state.Nav.concat("Tab" + this.counter)
-        })
-        this.counter += 1;
+            nav: this.state.nav.concat(this.props.data)
+        })     
+
     }
     render(){
         return(
             <div>
-            <button onClick={this.addToState}>SaveSearch</button>
+            <button onClick={this.addToState}>SaveAllSearches</button> 
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
-                    {this.state.Nav.map((item) => (
-                        <Nav.Item><Nav.Link eventKey={`${item}`}>{item}</Nav.Link></Nav.Item>))}
+                    {this.state.nav.map((item) => (
+                        <Nav.Item><Nav.Link eventKey={`${item.citizenId}`}>{item.forenames} {item.surname}</Nav.Link></Nav.Item>))}
                 </Nav>
                 </Col>
                 <Col sm={9}>
                 <Tab.Content>
-                    {this.state.Nav.map((item) => (
-                        <Tab.Pane eventKey={`${item}`}><p>{item}</p></Tab.Pane>
+                    {this.state.nav.map((item) => (
+                        <Tab.Pane eventKey={`${item.citizenId}`}><p>{item.forenames} <SearchSaveModal /></p></Tab.Pane>
                     ))}
                 </Tab.Content>
                 </Col>
