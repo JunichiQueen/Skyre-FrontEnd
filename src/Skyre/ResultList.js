@@ -4,6 +4,9 @@ import { Table } from 'reactstrap';
 import Individual from './Individual.js';
 
 export default class ResultList extends Component{
+    constructor(props){
+        super();
+    }
     render(){
         return(
             <div>

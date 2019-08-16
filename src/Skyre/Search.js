@@ -6,7 +6,7 @@ import AdvancedSearch from './AdvancedSearch.js';
 import ResultList from './ResultList.js';
 
 export default class Search extends Component{
-    constructor(){
+    constructor(props){
         super();
         this.state=({
             showSaver: "",
@@ -35,7 +35,7 @@ export default class Search extends Component{
                                 display: 'flex',
                                 justifyContent: 'left',
                             }} onClick={this.openSaveBar}>OpenSaveBar</button>
-                            { this.state.showSaver ? <SearchSave /> : null}
+                            { this.state.showSaver ? <SearchSave data={this.props.data}/> : null}
                         </Col>
                         <Col>
                             {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced}/> : <BasicSearch getBasic={this.props.getBasic}/>}

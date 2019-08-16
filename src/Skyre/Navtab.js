@@ -9,7 +9,7 @@ export default class NavTab extends Component {
     constructor(){
         super();
         this.state=({
-            data: []
+            data: [],
         })
     }
 
@@ -65,7 +65,7 @@ export default class NavTab extends Component {
                 justifyContent: 'center',
             }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example">
                     <Tab eventKey="search" title="Search">
-                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} data={this.state.data}/>
+                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data}/>
                     </Tab>
                     <Tab eventKey="map" title="Map">
                         <Map />
