@@ -9,7 +9,7 @@ export default class Login extends Component{
             password: e.target[1].value
         }
         axios
-        .post("URL", body).then(response => {
+        .post("http://localhost:3000/loginUser", body).then(response => {
             console.log("You have logged in")
         }).then(err => console.log(err));
     }
