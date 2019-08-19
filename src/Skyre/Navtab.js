@@ -85,13 +85,11 @@ class NavTab extends Component {
         let forenames = "forenames=" + e.target[0].value + "&";
         let surname = "surname=" + e.target[1].value + "&";
         let appender = "" + forenames + surname;
+
         axios
-            .get(`http://localhost:8081/Citizen/getCitizens?${appender}`).then(response => {
-                this.setState({
-                    data: response.data
-                })
-            }).catch(e => {
-                console.log(e);
+        .get(`http://localhost:5000/Citizen/getCitizens/${appender}`).then(response => {
+            this.setState({
+                data: response.data
             })
     }
 
@@ -115,11 +113,11 @@ class NavTab extends Component {
         //     sex: e.target[6].value
         // }
         axios
-            .get(`http://localhost:8081/Citizen/getCitizens?${appender}`).then(response => {
-                this.setState({
-                    data: response.data
-                })
-            }).catch(e => { console.log(e); })
+        .get(`http://localhost:5000/Citizen/getCitizens/${appender}`).then(response => {
+            this.setState({
+                data: response.data
+            })
+        }).catch(e => {console.log(e);})
     }
 
 
