@@ -54,6 +54,7 @@ class Login extends Component {
           password,
         });
         localStorage.setItem('JWT', response.data.token);
+        localStorage.setItem('username', username);
         this.setState({
           loggedIn: true,
           showError: false,
@@ -124,7 +125,7 @@ class Login extends Component {
               />
             </div>
           )}
-          <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/home" />
+          <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/" />
           <LinkButtons
             buttonStyle={forgotButton}
             buttonText="Forgot Password?"
@@ -133,7 +134,8 @@ class Login extends Component {
         </div>
       );
     }
-    return <Redirect to={`/userProfile/${username}`} />;
+    // return return <Redirect to={`/userProfile/${username}`} />;
+    return <Redirect to={`/home/${username}`} />;
   }
 }
 

@@ -46,45 +46,6 @@ class Profile extends Component {
     };
   }
 
-  async componentDidMount() {
-    const accessString = localStorage.getItem('JWT');
-    const {
-      match: {
-        params: { username },
-      },
-    } = this.props;
-    console.log(username);
-    if (accessString == null) {
-      this.setState({
-        isLoading: false,
-        error: true,
-      });
-    } else {
-      try {
-        const response = await axios.get('http://localhost:3003/findUser', {
-          params: {
-            username,
-          },
-          headers: { Authorization: `JWT ${accessString}` },
-        });
-        this.setState({
-          first_name: response.data.first_name,
-          last_name: response.data.last_name,
-          email: response.data.email,
-          username: response.data.username,
-          password: response.data.password,
-          isLoading: false,
-          error: false,
-        });
-      } catch (error) {
-        console.error(error.response.data);
-        this.setState({
-          error: true,
-        });
-      }
-    }
-  }
-
   deleteUser = async (e) => {
     const accessString = localStorage.getItem('JWT');
     const {

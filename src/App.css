@@ -23,6 +23,72 @@
   color: #61dafb;
 }
 
+.modal-body {
+
+    position: absolute;
+    left: -110%;
+    top: 40px;
+    padding-top: 500%;
+    padding-bottom: 200%;
+    /* margin-left: -312px;
+    height: px;
+    top: 50%;
+    margin-top: -250px; */
+ 
+}
+
+.modal-body2 {
+
+  position: relative;
+  left: -90%;
+  top: 40px;
+  padding-top: -50%;
+  padding-bottom: -500%;
+
+} 
+
+.modal-body3 {
+
+  position: relative;
+  left: -90%;
+  top: 40px;
+  padding-top: -50%;
+  padding-bottom: -500%;
+
+} 
+
+.modal-body4 {
+
+  position: relative;
+  left: -90%;
+  top: 40px;
+  padding-top: -50%;
+  padding-bottom: -500%;
+
+} 
+
+.modal-footer {
+
+  position: relative;
+
+  
+
+}
+
+/* .modal-title {
+
+  position: absolute;
+  left: 70%;
+  margin-left: -312px;
+  height: 800px;
+  top: 50%;
+  margin-top: -500px;
+
+}  */
+
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
