@@ -91,7 +91,8 @@ class NavTab extends Component {
             this.setState({
                 data: response.data
             })
-    }
+    })}
+
 
     getAdvanced = (e) => {
         e.preventDefault();
