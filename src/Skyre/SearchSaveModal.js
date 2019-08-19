@@ -17,8 +17,6 @@ export default function SearchSaveModal (props) {
         <p>{props.address}</p>
         {/* <p>{props.citizenId}</p>   */}
         
-        
-
         <Button variant="primary" onClick={handleShow}>
         More details
       </Button>
@@ -124,6 +122,7 @@ export default function SearchSaveModal (props) {
             <ModalBody>03/01/1994</ModalBody>
         </Modal.Body> */}
         <Modal.Footer class="modal-footer">
+
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

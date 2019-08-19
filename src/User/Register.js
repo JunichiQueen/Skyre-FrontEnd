@@ -44,7 +44,7 @@ class Register extends Component {
   registerUser = async (e) => {
     e.preventDefault();
     const {
- first_name, last_name, username, password, email 
+ first_name, last_name, username, password, email
 } = this.state;
     if (username === '' || password === '' || email === '') {
       this.setState({
@@ -163,7 +163,7 @@ class Register extends Component {
               />
             </div>
           )}
-          <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/home" />
+          <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/" />
         </div>
       );
     }
@@ -175,7 +175,7 @@ class Register extends Component {
           <LinkButtons
             buttonText="Go Login"
             buttonStyle={loginButton}
-            link="/login"
+            link="/"
           />
         </div>
       );
