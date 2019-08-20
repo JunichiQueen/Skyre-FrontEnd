@@ -104,15 +104,6 @@ class NavTab extends Component {
         let placeOfBirth = "placeOfBirth=" + e.target[5].value + "&";
         let sex = "sex=" + e.target[6].value + "&";
         let appender = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
-        // let entry = {
-        //     fornames: e.target[0].value,
-        //     surname: e.target[1].value,
-        //     citizenId: e.target[2].value,
-        //     homeAddress: e.target[3].value,
-        //     dateOfBirth: e.target[4].value,
-        //     placeOfBirth: e.target[5].value,
-        //     sex: e.target[6].value
-        // }
         axios
         .get(`http://localhost:5000/Citizen/getCitizens/${appender}`).then(response => {
             this.setState({
