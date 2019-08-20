@@ -39,7 +39,8 @@ export default class SearchSave extends Component {
                         <Col sm={9}>
                             <Tab.Content>
                                 {this.state.nav.map((item) => (
-                                    <Tab.Pane eventKey={`${item.citizenId}`}><p>{item.forenames} <SearchSaveModal /></p></Tab.Pane>
+                                    <Tab.Pane eventKey={`${item.citizenId}`}><SearchSaveModal firstname={item.forenames} lastname={item.surname} address={item.homeAddress}
+                                    placeOfBirth={item.placeOfBirth} dateOfBirth={item.dateOfBirth} sex={item.sex} citizenId={item.citizenId} /></Tab.Pane>
                                 ))}
                             </Tab.Content>
                         </Col>
