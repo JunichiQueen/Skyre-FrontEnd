@@ -32,11 +32,14 @@ export default class Individual extends Component {
     }
 
     getMobile = () => {
+        let forenames = "forenames=" + this.props.firstname + "&";
+        let surname = "surname=" + this.props.lastname + "&";
+        let appender = "" + forenames + surname;
         axios
-        .get("URL")
+        .get(`http://localhost:5000/Citizen/getMobile/${appender}`)
         .then(response => {
             this.setState({
-                financeData: response.data
+                mobileData: response.data
             })
         })
         .catch(err => console.log(err))
@@ -47,7 +50,7 @@ export default class Individual extends Component {
         .get("URL")
         .then(response => {
             this.setState({
-                financeData: response.data
+                vehicleData: response.data
             })
         })
         .catch(err => console.log(err))
@@ -60,6 +63,7 @@ export default class Individual extends Component {
     }
     handleShow = () => {
         this.getFinance();
+        this.getMobile();
         this.setState({
             show: true
         })
@@ -127,15 +131,13 @@ export default class Individual extends Component {
                         </Modal.Body>
 
                     </Tab>
-                    <Tab eventKey="ANPR" title="ANPR">
+                    <Tab eventKey="Mobile" title="Mobile">
                 
                         <Modal.Body class="modal-body3">
                             
-                            <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
+                            <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
                             
-                            <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
-                        
-                            <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
+                            <ModalBody><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</ModalBody>
 
                         </Modal.Body>
 
