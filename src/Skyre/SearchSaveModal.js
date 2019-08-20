@@ -18,10 +18,9 @@ export default class Individual extends Component {
     getFinance = () => {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        //let homeAddress = "homeAddress=" + this.props.address + "&";
-        //let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
+        // let homeAddress = "homeAddress=" + this.props.address + "&";
+        // let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
         let appender = "" + forenames + surname;
-        //console.log(appender);
         axios
         .get(`http://localhost:5000/Citizen/getFinance/${appender}`)
         .then(response => {
@@ -35,9 +34,7 @@ export default class Individual extends Component {
     getMobile = () => {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        //let homeAddress = "homeAddress=" + this.props.address + "&";
         let appender = "" + forenames + surname;
-        console.log(appender);
         axios
         .get(`http://localhost:5000/Citizen/getMobile/${appender}`)
         .then(response => {
@@ -49,12 +46,8 @@ export default class Individual extends Component {
     }
 
     getVehicle = () => {
-        let forenames = "forenames=" + this.props.firstname + "&";
-        let surname = "surname=" + this.props.lastname + "&";
-        //let homeAddress = "homeAddress=" + this.props.address + "&";
-        let appender = "" + forenames + surname;
         axios
-        .get(`http://localhost:5000/Citizen/getVehicle/${appender}`)
+        .get("URL")
         .then(response => {
             this.setState({
                 vehicleData: response.data
@@ -71,7 +64,6 @@ export default class Individual extends Component {
     handleShow = () => {
         this.getFinance();
         this.getMobile();
-        this.getVehicle();
         this.setState({
             show: true
         })
@@ -151,23 +143,15 @@ export default class Individual extends Component {
 
                     </Tab>
                 
-                    <Tab eventKey="ANPR" title="ANPR">
+                    <Tab eventKey="Associates" title="Associates">
                 
                         <Modal.Body class="modal-body2">
                             
-                            <ModalBody><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</ModalBody>
-
-                            <ModalBody><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</ModalBody>
+                            <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
                             
-                            <ModalBody><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</ModalBody>
-
-                            <ModalBody><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</ModalBody>
-
-                            <ModalBody><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</ModalBody>
-
-                            <ModalBody><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</ModalBody>
-
-                            <ModalBody><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</ModalBody>
+                            <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
+                        
+                            <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
 
                         </Modal.Body>
                     </Tab>
