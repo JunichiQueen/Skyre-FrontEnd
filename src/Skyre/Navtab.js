@@ -5,12 +5,10 @@ import Map from './Map.js';
 import ANPR from './ANPR.js';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import Welcome from './Welcome.js';
 import Case from './Case.js';
 
 import {
-    logoutButton,
     HeaderBar,
 } from '../components';
 
@@ -151,8 +149,6 @@ class NavTab extends Component {
         axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
-            console.log(response);
-            console.log(response.data);
             this.setState({
                 data: response.data
             })
@@ -228,12 +224,9 @@ class NavTab extends Component {
                         <ANPR />
                     </Tab>
                     <Tab eventKey="user" title="User">
-                        <Button
-                            style={logoutButton}
-                            variant="contained"
-                            color="primary"
+                        <button
                             onClick={this.logout}
-                        ></Button>
+                        ></button>
                     </Tab>
                     <Tab eventKey="case" title="Case">
                         <Case collectedData={this.state.collectData} />

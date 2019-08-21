@@ -120,7 +120,7 @@ export default class Individual extends Component {
                         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                             <Tab eventKey="Biography" title="Biography">
 
-                                <Modal.Body class="modal-body">
+                                <Modal.Body className="modal-body">
 
                                     <ModalBody><b>Citizen Id:</b>{" " + citizenId}</ModalBody>
 
@@ -142,7 +142,7 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Financial Details" title="Financial Details">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body className="modal-body2">
 
                                     <ModalBody><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</ModalBody>
 
@@ -156,7 +156,7 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Mobile" title="Mobile">
 
-                                <Modal.Body class="modal-body3">
+                                <Modal.Body className="modal-body3">
 
                                     <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
 
@@ -168,7 +168,7 @@ export default class Individual extends Component {
 
                             <Tab eventKey="ANPR" title="ANPR">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body className="modal-body2">
 
                                     <ModalBody><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</ModalBody>
 
@@ -193,7 +193,7 @@ export default class Individual extends Component {
                     </Modal.Header>
 
 
-                    <Modal.Footer class="modal-footer">
+                    <Modal.Footer className="modal-footer">
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
