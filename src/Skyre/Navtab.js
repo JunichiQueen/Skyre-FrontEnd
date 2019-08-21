@@ -6,6 +6,7 @@ import ANPR from './ANPR.js';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Welcome from './Welcome.js';
 
 import {
     logoutButton,
@@ -36,6 +37,7 @@ class NavTab extends Component {
             isLoading: true,
             deleted: false,
             error: false,
+            welcome: true,
         })
     }
 
@@ -101,7 +103,8 @@ class NavTab extends Component {
             }).catch(e => {
                 console.log(e);
             })
-    }
+    })}
+
 
     getAdvanced = (e) => {
         e.preventDefault();
@@ -120,10 +123,17 @@ class NavTab extends Component {
             },
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
+
             this.setState({
                 data: response.data
             })
         }).catch(e => { console.log(e); })
+    }
+
+    welcomeOff = () => {
+        this.setState({
+            welcome: false,
+        })
     }
 
 
@@ -153,8 +163,8 @@ class NavTab extends Component {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example">
-                    <Tab eventKey="search" title="Search">
+                }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
+                    <Tab eventKey="search" title="Search" onClick={this.welcomeOff}>
                         <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} />
                     </Tab>
                     <Tab eventKey="map" title="Map">
@@ -171,7 +181,10 @@ class NavTab extends Component {
                             onClick={this.logout}
                         ></Button>
                     </Tab>
+                    <Tab eventKey="case" title="Case">
+                    </Tab>
                 </Tabs>
+                {this.state.welcome ? <Welcome /> : null}
             </div>
         );
     }
