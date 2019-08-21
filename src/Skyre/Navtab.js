@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Welcome from './Welcome.js';
+import Case from './Case.js';
 
 import {
     logoutButton,
@@ -29,6 +30,7 @@ class NavTab extends Component {
         super();
         this.state = ({
             data: [],
+            collectData: [],
             first_name: '',
             last_name: '',
             email: '',
@@ -39,6 +41,58 @@ class NavTab extends Component {
             error: false,
             welcome: true,
         })
+    }
+
+    collectAllData = (forename, surname, address, e) => {
+        e.preventDefault();
+        let appender = "forenames=" + forename + "&" + "surname=" + surname + "&" + "address=" + address + "&";
+        let collectedData = [];
+        let citizenObj = {};
+        let financeObj = {};
+        let mobileObj = {};
+        let anprObj = {};
+        const accessString = localStorage.getItem('JWT');
+        axios
+        .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
+                params: {
+                    appender,
+                },
+                headers: { Authorization: `JWT ${accessString}` },
+            })
+        .then(response => {
+            citizenObj = response.data[0];
+            collectedData.concat(citizenObj);
+        })
+        .catch(err => console.log(err))
+
+        axios
+        .get("financeURL" + appender)
+        .then(response => {
+            financeObj = response.data[0];
+            collectedData.concat(financeObj)
+        })
+        .catch(err => console.log(err))
+
+        axios
+        .get("mobileURL" + appender)
+        .then(response => {
+            mobileObj = response.data[0];
+            collectedData.concat(mobileObj)
+        })
+        .catch(err => console.log(err))
+
+        axios
+        .get("anprURL" + appender)
+        .then(response => {
+            anprObj = response.data[0];
+            collectedData.concat(anprObj)
+        })
+        .catch(err => console.log(err))
+        
+        this.setState({
+            collectData: collectedData
+        })
+
     }
 
     async componentDidMount() {
@@ -91,6 +145,7 @@ class NavTab extends Component {
 
         let forenames = "forenames=" + e.target[0].value + "&";
         let surname = "surname=" + e.target[1].value;
+
         let toSend = "" + forenames + surname;
 
         axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
@@ -164,7 +219,7 @@ class NavTab extends Component {
                     justifyContent: 'center',
                 }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
                     <Tab eventKey="search" title="Search" onClick={this.welcomeOff}>
-                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} />
+                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData}/>
                     </Tab>
                     <Tab eventKey="map" title="Map">
                         <Map />
@@ -181,6 +236,7 @@ class NavTab extends Component {
                         ></Button>
                     </Tab>
                     <Tab eventKey="case" title="Case">
+                        <Case collectedData={this.state.collectData}/>
                     </Tab>
                 </Tabs>
                 {this.state.welcome ? <Welcome /> : null}

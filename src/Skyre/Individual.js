@@ -100,6 +100,7 @@ export default class Individual extends Component {
             dateOfBirth,
             placeOfBirth,
             sex,
+            collectAllData,
         } = this.props;
         return (
             <div>
@@ -109,6 +110,10 @@ export default class Individual extends Component {
 
                 <Button variant="primary" onClick={this.handleShow}>
                     More details
+                </Button>
+                <Button variant="secondary" onClick={() => collectAllData(firstname, lastname, address)}>
+                    SaveToCase
+
                 </Button>
                 <Modal size="lg"
                     show={this.state.show}

@@ -50,7 +50,7 @@ export default class Search extends Component {
                         <Col>
                         </Col>
                         <Col>
-                            <ResultList data={this.props.data} />
+                            <ResultList data={this.props.data} collectAllData={this.props.collectAllData}/>
                         </Col>
                         <Col>
                         </Col>

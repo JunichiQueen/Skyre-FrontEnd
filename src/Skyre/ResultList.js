@@ -18,7 +18,7 @@ export default class ResultList extends Component{
                             firstname={item.forenames} lastname={item.surname} 
                             address={item.homeAddress} placeOfBirth={item.placeOfBirth} 
                             dateOfBirth={item.dateOfBirth} sex={item.sex}
-                            citizenId={item.citizenId}/></td></tr>
+                            citizenId={item.citizenId} collectAllData={this.props.collectAllData}/></td></tr>
                         )
                         )}
                     </tbody>
