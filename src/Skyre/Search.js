@@ -29,16 +29,16 @@ export default class Search extends Component {
 
         return (
             <div>
-                <Container>
+                <Container fluid>
                     <Row>
-                        <Col>
+                        <Col xs={3}>
                             <button style={{
                                 display: 'flex',
                                 justifyContent: 'left',
                             }} onClick={this.openSaveBar}>OpenSaveBar</button>
                             {this.state.showSaver ? <SearchSave data={this.props.data} /> : null}
                         </Col>
-                        <Col>
+                        <Col xs={6}>
                             {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic} />}
                             <br></br>
                             <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
