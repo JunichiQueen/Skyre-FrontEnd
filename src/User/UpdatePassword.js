@@ -17,6 +17,8 @@ import {
   inputStyle,
 } from '../components';
 
+var URL = require('./const');
+
 const loading = {
   margin: '1em',
   fontSize: '24px',
@@ -55,7 +57,7 @@ class UpdatePassword extends Component {
         },
       } = this.props;
       try {
-        const response = await axios.get('http://localhost:3003/findUser', {
+        const response = await axios.get(`${URL.URL}/findUser`, {
           params: {
             username,
           },
@@ -95,7 +97,7 @@ class UpdatePassword extends Component {
       const { username, password } = this.state;
       try {
         const response = await axios.put(
-          'http://localhost:3003/updatePassword',
+          `${URL.URL}/updatePassword`,
           {
             username,
             password,
@@ -125,7 +127,7 @@ class UpdatePassword extends Component {
   // eslint-disable-next-line consistent-return
   render() {
     const {
- username, password, updated, error, loadingUser 
+ username, password, updated, error, loadingUser
 } = this.state;
 
     if (error) {

@@ -12,6 +12,8 @@ import {
     HeaderBar,
 } from '../components';
 
+var URL = require('../User/const');
+
 const title = {
     pageTitle: 'Home',
 };
@@ -49,7 +51,7 @@ class NavTab extends Component {
             });
         } else {
             try {
-                const response = await axios.get('http://localhost:3003/findUser', {
+                const response = await axios.get(`${URL.URL}/findUser`, {
                     params: {
                         username,
                     },
@@ -83,10 +85,16 @@ class NavTab extends Component {
     getBasic = (e) => {
         e.preventDefault();
         let forenames = "forenames=" + e.target[0].value + "&";
-        let surname = "surname=" + e.target[1].value + "&";
-        let appender = "" + forenames + surname;
+        let surname = "surname=" + e.target[1].value;
+        let params = "" + forenames + surname;
+        const accessString = localStorage.getItem('JWT');
         axios
-            .get(`http://localhost:8081/Citizen/getCitizens?${appender}`).then(response => {
+            .get(`http://localhost:9003/scenario1/getBasicCitizens?${params}`, {
+                params: {
+                    params,
+                },
+                headers: { Authorization: `JWT ${accessString}` },
+            }).then(response => {
                 this.setState({
                     data: response.data
                 })
@@ -103,23 +111,19 @@ class NavTab extends Component {
         let homeAddress = "homeAddress=" + e.target[3].value + "&";
         let dateOfBirth = "dateOfBirth=" + e.target[4].value + "&";
         let placeOfBirth = "placeOfBirth=" + e.target[5].value + "&";
-        let sex = "sex=" + e.target[6].value + "&";
-        let appender = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
-        // let entry = {
-        //     fornames: e.target[0].value,
-        //     surname: e.target[1].value,
-        //     citizenId: e.target[2].value,
-        //     homeAddress: e.target[3].value,
-        //     dateOfBirth: e.target[4].value,
-        //     placeOfBirth: e.target[5].value,
-        //     sex: e.target[6].value
-        // }
-        axios
-            .get(`http://localhost:8081/Citizen/getCitizens?${appender}`).then(response => {
-                this.setState({
-                    data: response.data
-                })
-            }).catch(e => { console.log(e); })
+        let sex = "sex=" + e.target[6].value;
+        let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
+        const accessString = localStorage.getItem('JWT');
+        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?`, {
+            params: {
+                toSend,
+            },
+            headers: { Authorization: `JWT ${accessString}` },
+        }).then(response => {
+            this.setState({
+                data: response.data
+            })
+        }).catch(e => { console.log(e); })
     }
 
 
