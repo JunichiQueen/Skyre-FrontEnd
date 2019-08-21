@@ -20,7 +20,7 @@ export default class Individual extends Component {
         const accessString = localStorage.getItem('JWT');
 
         let forenames = "forenames=" + this.props.firstname + "&";
-        let surname = "surname=" + this.props.lastname + "&";
+        let surname = "surname=" + this.props.lastname;
         let toSend = "" + forenames + surname;
         console.log("GET FINANCE " + toSend)
 
@@ -40,7 +40,7 @@ export default class Individual extends Component {
         const accessString = localStorage.getItem('JWT');
 
         let forenames = "forenames=" + this.props.firstname + "&";
-        let surname = "surname=" + this.props.lastname + "&";
+        let surname = "surname=" + this.props.lastname;
         let toSend = "" + forenames + surname;
         console.log("GET MOBILE " + toSend)
 
@@ -61,7 +61,7 @@ export default class Individual extends Component {
         const accessString = localStorage.getItem('JWT');
 
         let forenames = "forenames=" + this.props.firstname + "&";
-        let surname = "surname=" + this.props.lastname + "&";
+        let surname = "surname=" + this.props.lastname;
         let toSend = "" + forenames + surname;
         console.log("GET VEHICLE " + toSend)
 

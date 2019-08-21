@@ -45,7 +45,7 @@ class NavTab extends Component {
 
     collectAllData = (forename, surname, address, e) => {
         e.preventDefault();
-        let appender = "forenames=" + forename + "&" + "surname=" + surname + "&" + "address=" + address + "&";
+        let appender = "forenames=" + forename + "&surname=" + surname + "&address=" + address + "&";
         let collectedData = [];
         let citizenObj = {};
         let financeObj = {};
@@ -53,42 +53,42 @@ class NavTab extends Component {
         let anprObj = {};
         const accessString = localStorage.getItem('JWT');
         axios
-        .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
+            .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
                 params: {
                     appender,
                 },
                 headers: { Authorization: `JWT ${accessString}` },
             })
-        .then(response => {
-            citizenObj = response.data[0];
-            collectedData.concat(citizenObj);
-        })
-        .catch(err => console.log(err))
+            .then(response => {
+                citizenObj = response.data[0];
+                collectedData.concat(citizenObj);
+            })
+            .catch(err => console.log(err))
 
         axios
-        .get("financeURL" + appender)
-        .then(response => {
-            financeObj = response.data[0];
-            collectedData.concat(financeObj)
-        })
-        .catch(err => console.log(err))
+            .get("financeURL" + appender)
+            .then(response => {
+                financeObj = response.data[0];
+                collectedData.concat(financeObj)
+            })
+            .catch(err => console.log(err))
 
         axios
-        .get("mobileURL" + appender)
-        .then(response => {
-            mobileObj = response.data[0];
-            collectedData.concat(mobileObj)
-        })
-        .catch(err => console.log(err))
+            .get("mobileURL" + appender)
+            .then(response => {
+                mobileObj = response.data[0];
+                collectedData.concat(mobileObj)
+            })
+            .catch(err => console.log(err))
 
         axios
-        .get("anprURL" + appender)
-        .then(response => {
-            anprObj = response.data[0];
-            collectedData.concat(anprObj)
-        })
-        .catch(err => console.log(err))
-        
+            .get("anprURL" + appender)
+            .then(response => {
+                anprObj = response.data[0];
+                collectedData.concat(anprObj)
+            })
+            .catch(err => console.log(err))
+
         this.setState({
             collectData: collectedData
         })
@@ -219,7 +219,7 @@ class NavTab extends Component {
                     justifyContent: 'center',
                 }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
                     <Tab eventKey="search" title="Search" onClick={this.welcomeOff}>
-                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData}/>
+                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData} />
                     </Tab>
                     <Tab eventKey="map" title="Map">
                         <Map />
@@ -236,7 +236,7 @@ class NavTab extends Component {
                         ></Button>
                     </Tab>
                     <Tab eventKey="case" title="Case">
-                        <Case collectedData={this.state.collectData}/>
+                        <Case collectedData={this.state.collectData} />
                     </Tab>
                 </Tabs>
                 {this.state.welcome ? <Welcome /> : null}
