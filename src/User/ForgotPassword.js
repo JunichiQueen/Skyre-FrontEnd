@@ -12,6 +12,8 @@ import {
   HeaderBar,
 } from '../components';
 
+var URL = require('./const');
+
 const title = {
   pageTitle: 'Forgot Password Screen',
 };
@@ -46,7 +48,7 @@ class ForgotPassword extends Component {
     } else {
       try {
         const response = await axios.post(
-          'http://localhost:3003/forgotPassword',
+          `${URL.URL}/forgotPassword`,
           {
             email,
           },
@@ -74,7 +76,7 @@ class ForgotPassword extends Component {
 
   render() {
     const {
- email, messageFromServer, showNullError, showError 
+ email, messageFromServer, showNullError, showError
 } = this.state;
 
     return (

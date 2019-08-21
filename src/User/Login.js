@@ -10,10 +10,11 @@ import {
   registerButton,
   homeButton,
   loginButton,
-  forgotButton,
   inputStyle,
   HeaderBar,
 } from '../components';
+
+var URL = require('./const');
 
 const title = {
   pageTitle: 'Login Screen',
@@ -49,7 +50,7 @@ class Login extends Component {
       });
     } else {
       try {
-        const response = await axios.post('http://localhost:3003/loginUser', {
+        const response = await axios.post(`${URL.URL}/loginUser`, {
           username,
           password,
         });
@@ -126,11 +127,6 @@ class Login extends Component {
             </div>
           )}
           <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/" />
-          <LinkButtons
-            buttonStyle={forgotButton}
-            buttonText="Forgot Password?"
-            link="/forgotPassword"
-          />
         </div>
       );
     }

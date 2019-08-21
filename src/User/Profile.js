@@ -18,7 +18,6 @@ import {
   logoutButton,
   HeaderBar,
   linkStyle,
-  forgotButton,
 } from '../components';
 
 const loading = {
@@ -62,7 +61,7 @@ class Profile extends Component {
 
     e.preventDefault();
     try {
-      const response = await axios.delete('http://localhost:3003/deleteUser', {
+      const response = await axios.delete('/deleteUser/:entry', {
         params: {
           username,
         },
@@ -70,6 +69,7 @@ class Profile extends Component {
       });
       console.log(response.data);
       localStorage.removeItem('JWT');
+      localStorage.removeItem('user');
       this.setState({
         deleted: true,
       });
@@ -165,11 +165,6 @@ class Profile extends Component {
           buttonStyle={updateButton}
           buttonText="Update User"
           link={`/updateUser/${username}`}
-        />
-        <LinkButtons
-          buttonStyle={forgotButton}
-          buttonText="Update Password"
-          link={`/updatePassword/${username}`}
         />
         <Button
           style={logoutButton}
