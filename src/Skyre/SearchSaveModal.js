@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {Tab, Tabs, Modal, Button, ModalBody} from 'react-bootstrap';
+import { Tab, Tabs, Modal, Button, ModalBody } from 'react-bootstrap';
 import axios from 'axios';
 
 
 
 export default class Individual extends Component {
-    constructor(props){
+    constructor(props) {
         super();
-        this.state={
+        this.state = {
             show: false,
             financeData: [],
             mobileData: [],
@@ -15,47 +15,71 @@ export default class Individual extends Component {
         }
     }
 
-    getFinance = () => {
+    getFinance = (e) => {
+        e.preventDefault();
+
+        const accessString = localStorage.getItem('JWT');
+
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         // let homeAddress = "homeAddress=" + this.props.address + "&";
         // let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
-        let appender = "" + forenames + surname;
-        axios
-        .get(`http://localhost:5000/Citizen/getFinance/${appender}`)
-        .then(response => {
+        let toSend = "" + forenames + surname;
+        console.log("GET FINANCE " + toSend)
+        axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
+            headers: { Authorization: `JWT ${accessString}` },
+        }).then(response => {
             this.setState({
                 financeData: response.data
             })
+        }).catch(e => {
+            console.log(e);
         })
-        .catch(err => console.log(err))
     }
 
-    getMobile = () => {
+    getMobile = (e) => {
+        e.preventDefault();
+
+        const accessString = localStorage.getItem('JWT');
+
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let appender = "" + forenames + surname;
-        axios
-        .get(`http://localhost:5000/Citizen/getMobile/${appender}`)
-        .then(response => {
+        let toSend = "" + forenames + surname;
+        console.log("GET MOBILE " + toSend)
+        axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
+            headers: { Authorization: `JWT ${accessString}` },
+        }).then(response => {
             this.setState({
                 mobileData: response.data
             })
+        }).catch(e => {
+            console.log(e);
         })
-        .catch(err => console.log(err))
     }
 
-    getVehicle = () => {
-        axios
-        .get("URL")
-        .then(response => {
-            this.setState({
-                vehicleData: response.data
-            })
+    getVehicle = (e) => {
+        e.preventDefault();
+
+        const accessString = localStorage.getItem('JWT');
+
+        let forenames = "forenames=" + this.props.firstname + "&";
+        let surname = "surname=" + this.props.lastname + "&";
+        let toSend = "" + forenames + surname;
+        console.log("GET VEHICLE " + toSend)
+        axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
+            headers: { Authorization: `JWT ${accessString}` },
         })
-        .catch(err => console.log(err))
+            .then(response => {
+                console.log("1" + response.data);
+                console.log(this.state.vehicleData);
+                this.setState({
+                    vehicleData: response.data
+                })
+            }).catch(e => {
+                console.log(e);
+            })
     }
-  
+
     handleClose = () => {
         this.setState({
             show: false
@@ -69,7 +93,7 @@ export default class Individual extends Component {
         })
     }
 
-    render(){
+    render() {
         const {
             citizenId,
             firstname,
@@ -81,85 +105,85 @@ export default class Individual extends Component {
         } = this.props;
         return (
             <div>
-      
+
                 <p>{firstname + " "}{lastname}</p>
-                <p>{address}</p>               
-                
+                <p>{address}</p>
+
                 <Button variant="primary" onClick={this.handleShow}>
-                More details
+                    More details
                 </Button>
-                <Modal size="lg" 
-                    show={this.state.show} 
-                    onHide={this.handleClose} 
+                <Modal size="lg"
+                    show={this.state.show}
+                    onHide={this.handleClose}
                     dialogClassName="modal-150w"
-                    >
-                <Modal.Header closeButton>
-                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                    <Tab eventKey="Biography" title="Biography">
-                    
-                        <Modal.Body class="modal-body">
-                            
-                                <ModalBody><b>Citizen Id:</b>{" " + citizenId}</ModalBody>
-                                
-                                <ModalBody><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</ModalBody>
-                            
-                                <ModalBody><b>Address:</b>{" " + address}</ModalBody>
+                >
+                    <Modal.Header closeButton>
+                        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                            <Tab eventKey="Biography" title="Biography">
 
-                                <ModalBody><b>Sex:</b>{" " + sex}</ModalBody>
+                                <Modal.Body class="modal-body">
 
-                                <ModalBody><b>Place Of Birth:</b>{" " + placeOfBirth}</ModalBody>
-                            
-                                <ModalBody><b>Date Of Birth:</b>{" " + dateOfBirth}</ModalBody>
-                            
-                            
-                        </Modal.Body>
+                                    <ModalBody><b>Citizen Id:</b>{" " + citizenId}</ModalBody>
 
-                
-                    
-                    </Tab>
-                    <Tab eventKey="Financial Details" title="Financial Details">
-                    
-                        <Modal.Body class="modal-body2">
+                                    <ModalBody><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</ModalBody>
 
-                            <ModalBody><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</ModalBody>
+                                    <ModalBody><b>Address:</b>{" " + address}</ModalBody>
 
-                            <ModalBody><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</ModalBody>
-                            
-                            <ModalBody><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</ModalBody>                 
-                            
-                        
-                        </Modal.Body>
+                                    <ModalBody><b>Sex:</b>{" " + sex}</ModalBody>
 
-                    </Tab>
-                    <Tab eventKey="Mobile" title="Mobile">
-                
-                        <Modal.Body class="modal-body3">
-                            
-                            <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
-                            
-                            <ModalBody><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</ModalBody>
+                                    <ModalBody><b>Place Of Birth:</b>{" " + placeOfBirth}</ModalBody>
 
-                        </Modal.Body>
+                                    <ModalBody><b>Date Of Birth:</b>{" " + dateOfBirth}</ModalBody>
 
-                    </Tab>
-                
-                    <Tab eventKey="Associates" title="Associates">
-                
-                        <Modal.Body class="modal-body2">
-                            
-                            <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
-                            
-                            <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
-                        
-                            <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
 
-                        </Modal.Body>
-                    </Tab>
-                
-                </Tabs>
-                
-                <Modal.Title></Modal.Title>
-                </Modal.Header>
+                                </Modal.Body>
+
+
+
+                            </Tab>
+                            <Tab eventKey="Financial Details" title="Financial Details">
+
+                                <Modal.Body class="modal-body2">
+
+                                    <ModalBody><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</ModalBody>
+
+                                    <ModalBody><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</ModalBody>
+
+                                    <ModalBody><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</ModalBody>
+
+
+                                </Modal.Body>
+
+                            </Tab>
+                            <Tab eventKey="Mobile" title="Mobile">
+
+                                <Modal.Body class="modal-body3">
+
+                                    <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
+
+                                    <ModalBody><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</ModalBody>
+
+                                </Modal.Body>
+
+                            </Tab>
+
+                            <Tab eventKey="Associates" title="Associates">
+
+                                <Modal.Body class="modal-body2">
+
+                                    <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
+
+                                    <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
+
+                                    <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
+
+                                </Modal.Body>
+                            </Tab>
+
+                        </Tabs>
+
+                        <Modal.Title></Modal.Title>
+                    </Modal.Header>
 
 
                     <Modal.Footer class="modal-footer">
@@ -172,7 +196,7 @@ export default class Individual extends Component {
                     </Modal.Footer>
                 </Modal>
             </div>
-    );       
+        );
 
     }
 }

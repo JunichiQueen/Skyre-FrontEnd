@@ -86,28 +86,31 @@ class NavTab extends Component {
 
     getBasic = (e) => {
         e.preventDefault();
+
+        const accessString = localStorage.getItem('JWT');
+
         let forenames = "forenames=" + e.target[0].value + "&";
         let surname = "surname=" + e.target[1].value;
-        let params = "" + forenames + surname;
-        const accessString = localStorage.getItem('JWT');
-        axios
-            .get(`http://localhost:9003/scenario1/getBasicCitizens?${params}`, {
-                params: {
-                    params,
-                },
-                headers: { Authorization: `JWT ${accessString}` },
-            }).then(response => {
-                this.setState({
-                    data: response.data
-                })
-            }).catch(e => {
-                console.log(e);
-            })
-    })}
+        let toSend = "" + forenames + surname;
 
+        axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
+            headers: { Authorization: `JWT ${accessString}` },
+        }).then(response => {
+            console.log(response);
+            console.log(response.data);
+            this.setState({
+                data: response.data
+            })
+        }).catch(e => {
+            console.log(e);
+        })
+    }
 
     getAdvanced = (e) => {
         e.preventDefault();
+
+        const accessString = localStorage.getItem('JWT');
+
         let forenames = "forenames=" + e.target[0].value + "&";
         let surname = "surname=" + e.target[1].value + "&";
         let citizenId = "citizenId=" + e.target[2].value + "&";
@@ -116,11 +119,8 @@ class NavTab extends Component {
         let placeOfBirth = "placeOfBirth=" + e.target[5].value + "&";
         let sex = "sex=" + e.target[6].value;
         let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
-        const accessString = localStorage.getItem('JWT');
-        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?`, {
-            params: {
-                toSend,
-            },
+
+        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
 
@@ -135,7 +135,6 @@ class NavTab extends Component {
             welcome: false,
         })
     }
-
 
     render() {
         const {
