@@ -23,7 +23,6 @@ export default class SearchSave extends Component {
         this.setState({
             nav: this.state.nav.concat(this.props.data)
         })
-
     }
     render() {
         return (
