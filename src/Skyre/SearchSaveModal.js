@@ -22,10 +22,8 @@ export default class Individual extends Component {
 
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        // let homeAddress = "homeAddress=" + this.props.address + "&";
-        // let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET FINANCE " + toSend)
+
         axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
@@ -45,7 +43,7 @@ export default class Individual extends Component {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET MOBILE " + toSend)
+
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
@@ -65,13 +63,11 @@ export default class Individual extends Component {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET VEHICLE " + toSend)
+
         axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {
-                console.log("1" + response.data);
-                console.log(this.state.vehicleData);
                 this.setState({
                     vehicleData: response.data
                 })
