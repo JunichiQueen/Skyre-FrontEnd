@@ -51,8 +51,14 @@ class NavTab extends Component {
         let financeObj = {};
         let mobileObj = {};
         let anprObj = {};
+        const accessString = localStorage.getItem('JWT');
         axios
-        .get("citizenURL" + appender)
+        .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
+                params: {
+                    appender,
+                },
+                headers: { Authorization: `JWT ${accessString}` },
+            })
         .then(response => {
             citizenObj = response.data[0];
             collectedData.concat(citizenObj);
