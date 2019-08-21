@@ -151,7 +151,7 @@ class NavTab extends Component {
             }).catch(e => {
                 console.log(e);
             })
-    })}
+    }
 
 
     getAdvanced = (e) => {
