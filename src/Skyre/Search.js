@@ -52,7 +52,7 @@ export default class Search extends Component {
             <div>
                 <div id="mySidebar" class="sidebar">
                     
-                    <Button color="primary" onClick={this.closeNav}>CloseSavebar</Button>
+                    <Button color="danger" onClick={this.closeNav}>CloseSavebar</Button>
                             <SearchSave data={this.props.data} />
                 </div>
                 <div id="main">
@@ -60,7 +60,7 @@ export default class Search extends Component {
 
                             {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic} />}
                             <br></br>
-                            <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
+                            <Button outline onClick={this.openAdvancedSearch} size="sm">ToggleAdvanced</Button>
 
                             <ResultList data={this.props.data} collectAllData={this.props.collectAllData}/>
                 </div>

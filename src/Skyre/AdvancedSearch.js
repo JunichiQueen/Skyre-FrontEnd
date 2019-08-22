@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 
 export default function AdvancedSearch (props){
     return(
@@ -18,7 +19,8 @@ export default function AdvancedSearch (props){
                 <input placeholder="place of birth"></input>
                 <p>Sex</p>
                 <input placeholder="sex"></input>
-                <button type="submit">Search</button>
+                <br></br>
+                <Button color="info"type="submit">Search</Button>
             </form>
         </div>
     )

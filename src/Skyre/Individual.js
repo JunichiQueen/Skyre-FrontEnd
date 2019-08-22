@@ -11,7 +11,8 @@ export default class Individual extends Component {
             show: false,
             financeData: [],
             mobileData: [],
-            vehicleData: []
+            vehicleData: [],
+            associateData: [],
         }
     }
 
@@ -45,10 +46,22 @@ export default class Individual extends Component {
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
-            console.log("FLAG 1" + response.data);
+            console.log("FLAG 1" + response.data[0]);
+            let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
             this.setState({
                 mobileData: response.data
             })
+            axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
+                headers: { Authorization: `JWT ${accessString}`},
+            }).then(response => {
+                console.log("associates:" + response.data);
+                this.setState({
+                    associateData: response.data
+                })
+            }).catch(e => {
+                console.log(e)
+            })
+
         }).catch(e => {
             console.log(e);
         })
@@ -185,6 +198,14 @@ export default class Individual extends Component {
 
                                     <ModalBody><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</ModalBody>
 
+                                </Modal.Body>
+                            </Tab>
+
+                            <Tab>
+                                
+                                <Modal.Body class="modal-body2">
+
+                                    {this.state.associateData.map((item) => <ModalBody><b>Name: </b>{" " + item.forenames})</ModalBody>)}
                                 </Modal.Body>
                             </Tab>
 
