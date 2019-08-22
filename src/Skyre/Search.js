@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 import { Container, Col, Row } from 'react-bootstrap';
 import SearchSave from './SearchSave';
 import BasicSearch from './BasicSearch.js';
 import AdvancedSearch from './AdvancedSearch.js';
 import ResultList from './ResultList.js';
 
+import './SearchStyle.css';
+
 export default class Search extends Component {
     constructor(props) {
         super();
         this.state = {
-            showSaver: "",
             showAdvanced: "",
+            collapse: false
         };
     }
 
@@ -24,38 +27,43 @@ export default class Search extends Component {
             showAdvanced: !this.state.showAdvanced
         })
     }
+    
+    // toggle = () => {
+    //     this.setState({ 
+    //         collapse: !this.state.collapse 
+    //     });
+    // }
+
+    openNav() {
+        document.getElementById("mySidebar").style.width = "400px";
+        document.getElementById("main").style.marginLeft = "400px";
+    }
+
+    closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+
+
 
     render() {
 
         return (
             <div>
-                <Container fluid>
-                    <Row>
-                        <Col xs={3}>
-                            <button style={{
-                                display: 'flex',
-                                justifyContent: 'left',
-                            }} onClick={this.openSaveBar}>OpenSaveBar</button>
-                            {this.state.showSaver ? <SearchSave data={this.props.data} /> : null}
-                        </Col>
-                        <Col xs={6}>
+                <div id="mySidebar" class="sidebar">
+                    
+                    <Button color="primary" onClick={this.closeNav}>CloseSavebar</Button>
+                            <SearchSave data={this.props.data} />
+                </div>
+                <div id="main">
+                            <Button color="primary" onClick={this.openNav} style={{marginBottom: '1rem' }}>OpenSaveBar</Button>
+
                             {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic} />}
                             <br></br>
                             <button onClick={this.openAdvancedSearch}>AdvancedSearch</button>
-                        </Col>
-                        <Col>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                        </Col>
-                        <Col>
+
                             <ResultList data={this.props.data} collectAllData={this.props.collectAllData}/>
-                        </Col>
-                        <Col>
-                        </Col>
-                    </Row>
-                </Container>
+                </div>
             </div>
         );
     }

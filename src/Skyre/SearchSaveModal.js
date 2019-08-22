@@ -15,8 +15,7 @@ export default class Individual extends Component {
         }
     }
 
-    getFinance = (e) => {
-        e.preventDefault();
+    getFinance = () => {
 
         const accessString = localStorage.getItem('JWT');
 
@@ -25,7 +24,6 @@ export default class Individual extends Component {
         // let homeAddress = "homeAddress=" + this.props.address + "&";
         // let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET FINANCE " + toSend)
         axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
@@ -37,15 +35,13 @@ export default class Individual extends Component {
         })
     }
 
-    getMobile = (e) => {
-        e.preventDefault();
+    getMobile = () => {
 
         const accessString = localStorage.getItem('JWT');
 
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET MOBILE " + toSend)
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
@@ -57,21 +53,17 @@ export default class Individual extends Component {
         })
     }
 
-    getVehicle = (e) => {
-        e.preventDefault();
+    getVehicle = () => {
 
         const accessString = localStorage.getItem('JWT');
 
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
-        console.log("GET VEHICLE " + toSend)
         axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {
-                console.log("1" + response.data);
-                console.log(this.state.vehicleData);
                 this.setState({
                     vehicleData: response.data
                 })
@@ -106,8 +98,8 @@ export default class Individual extends Component {
         return (
             <div>
 
-                <p>{firstname + " "}{lastname}</p>
-                <p>{address}</p>
+                <p style={{ color: "#f1f1f1"}}>{firstname + " "}{lastname}</p>
+                <p style={{ color: "#f1f1f1"}}>{address}</p>
 
                 <Button variant="primary" onClick={this.handleShow}>
                     More details

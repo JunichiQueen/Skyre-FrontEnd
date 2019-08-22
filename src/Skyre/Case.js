@@ -14,7 +14,7 @@ export default class Case extends Component {
 
     getCase = () => {
         axios
-        .get("http://localhost:5000/suspect/")
+        .get("http://localhost:8085/suspect/")
         .then(response => {
             this.setState({
                 getData: response.data
@@ -38,7 +38,7 @@ export default class Case extends Component {
             citizenId: this.props.collectData[0].citizenId,
             forenames: this.props.collectData[0].forenames,
             surname: this.props.collectData[0].surname,
-            address: this.props.collectData[0].address,
+            homeAddress: this.props.collectData[0].homeAddress,
             dateOfBirth: this.props.collectData[0].dateOfBirth,
             placeOfBirth: this.props.collectData[0].placeOfBirth,
             sex: this.props.collectData[0].sex,
@@ -48,7 +48,7 @@ export default class Case extends Component {
             phoneNumber: this.props.collectData[2].phoneNumber,
             network: this.props.collectData[2].network,
             registrationId: this.props.collectData[3].registrationId,
-            driverlicenseId: this.props.collectData[3].driverlicenceId,
+            driverLicenceId: this.props.collectData[3].driverLicenceId,
             vehicleRegistrationNo: this.props.collectData[3].vehicleRegistrationNo,
             registrationDate: this.props.collectData[3].registrationDate,
             make: this.props.collectData[3].make,
@@ -56,7 +56,7 @@ export default class Case extends Component {
             colour: this.props.collectData[3].colour,
         }
         axios
-        .post("http://localhost:5000/suspect/addSuspect", suspect)
+        .post("http://localhost:8085/suspect/addSuspect", suspect)
         .then(response => {
             this.getCase();
         })
@@ -69,9 +69,9 @@ export default class Case extends Component {
                 <Table>
                     <tbody>
                         {this.state.getData.map((item) => (
-                            <tr key={item._id}><td><CaseIndividual forenames={item.forenames} surname={item.surname} address={item.address} dateOfBirth={item.dateOfBirth}
+                            <tr key={item._id}><td><CaseIndividual forenames={item.forenames} surname={item.surname} homeAddress={item.homeAddress} dateOfBirth={item.dateOfBirth}
                             placeOfBirth={item.placeOfBirth} sex={item.sex} bankAccountId={item.bankAccountId} accountNumber={item.accountNumber} bank={item.bank}
-                            phoneNumber={item.phoneNumber} network={item.network} registrationId={item.registrationId} driverlicenseId={item.driverlicenseId}
+                            phoneNumber={item.phoneNumber} network={item.network} registrationId={item.registrationId} driverLicenceId={item.driverLicenceId}
                             vehicleRegistrationNo={item.vehicleRegistrationNo} registrationDate={item.registrationDate} make={item.make} model={item.model} colour={item.colour}/></td></tr>
                         ))}
                     </tbody>

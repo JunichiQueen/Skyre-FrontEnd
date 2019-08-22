@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 import { Tab, Nav, Col, Row } from 'react-bootstrap';
 
 import SearchSaveModal from './SearchSaveModal.js';
@@ -28,16 +29,17 @@ export default class SearchSave extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.addToState}>SaveAllSearches</button>
+                <br></br>
+                <Button color="primary" onClick={this.addToState}>SaveAllSearches</Button>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                     <Row>
-                        <Col sm={3}>
+                        <Col>
                             <Nav variant="pills" className="flex-column">
                                 {this.state.nav.map((item) => (
-                                    <Nav.Item><Nav.Link eventKey={`${item.citizenId}`}>{item.forenames} {item.surname}</Nav.Link></Nav.Item>))}
+                                    <Nav.Item><Nav.Link style={{ color: "#f1f1f1" }} eventKey={`${item.citizenId}`}>{item.forenames} {item.surname}</Nav.Link></Nav.Item>))}
                             </Nav>
                         </Col>
-                        <Col sm={9}>
+                        <Col>
                             <Tab.Content>
                                 {this.state.nav.map((item) => (
                                     <Tab.Pane eventKey={`${item.citizenId}`}><SearchSaveModal firstname={item.forenames} lastname={item.surname} address={item.homeAddress}
