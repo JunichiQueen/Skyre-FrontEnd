@@ -69,7 +69,7 @@ export default class Case extends Component {
                 <Table>
                     <tbody>
                         {this.state.getData.map((item) => (
-                            <tr><td><CaseIndividual forenames={item.forenames} surname={item.surname} address={item.address} dateOfBirth={item.dateOfBirth}
+                            <tr key={item._id}><td><CaseIndividual forenames={item.forenames} surname={item.surname} address={item.address} dateOfBirth={item.dateOfBirth}
                             placeOfBirth={item.placeOfBirth} sex={item.sex} bankAccountId={item.bankAccountId} accountNumber={item.accountNumber} bank={item.bank}
                             phoneNumber={item.phoneNumber} network={item.network} registrationId={item.registrationId} driverlicenseId={item.driverlicenseId}
                             vehicleRegistrationNo={item.vehicleRegistrationNo} registrationDate={item.registrationDate} make={item.make} model={item.model} colour={item.colour}/></td></tr>

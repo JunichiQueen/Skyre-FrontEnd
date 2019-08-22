@@ -24,6 +24,7 @@ export default class SearchSave extends Component {
             nav: this.state.nav.concat(this.props.data)
         })
     }
+
     render() {
         return (
             <div>
