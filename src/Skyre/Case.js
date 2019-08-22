@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 import axios from 'axios';
+
+import CaseIndividual from './CaseIndividual.js';
 
 export default class Case extends Component {
     constructor(props){
         super();
         this.state={
-            caseData: []
+            getData: [],
         }
     }
 
     getCase = () => {
         axios
-        .get("http://localhost:5000/suspect")
+        .get("http://localhost:5000/suspect/")
         .then(response => {
-            this.setState=({
-                caseDate: response.data
-            })                
+            this.setState({
+                getData: response.data
+            })
         })
         .catch(err => console.log(err))
     }
@@ -24,28 +27,33 @@ export default class Case extends Component {
         this.getCase();
     }
 
+    componentDidUpdate = (prevProps) => {
+        if ( this.props.collectData !== prevProps.collectData ) {
+            this.saveCase();
+        }
+    }
 
     saveCase = () => {
         let suspect = {
-            citizenId: this.props[0].citizenId,
-            forenames: this.props[0].forenames,
-            surname: this.props[0].surname,
-            address: this.props[0].address,
-            dateOfBirth: this.props[0].dateOfBirth,
-            placeOfBirth: this.props[0].placeOfBirth,
-            sex: this.props[0].sex,
-            bankAccountId: this.props[1].bankAccountId,
-            accountNumber: this.props[1].accountNumber,
-            bank: this.props[1].bank,
-            phoneNumber: this.props[2].phoneNumber,
-            network: this.props[2].network,
-            registrationId: this.props[3].registrationId,
-            driverlicenseId: this.props[3].driverlicenceId,
-            vehicleRegistrationNo: this.props[3].vehicleRegistrationNo,
-            registrationDate: this.props[3].registrationDate,
-            make: this.props[3].make,
-            model: this.props[3].model,
-            colour: this.props[3].colour,
+            citizenId: this.props.collectData[0].citizenId,
+            forenames: this.props.collectData[0].forenames,
+            surname: this.props.collectData[0].surname,
+            address: this.props.collectData[0].address,
+            dateOfBirth: this.props.collectData[0].dateOfBirth,
+            placeOfBirth: this.props.collectData[0].placeOfBirth,
+            sex: this.props.collectData[0].sex,
+            bankAccountId: this.props.collectData[1].bankAccountId,
+            accountNumber: this.props.collectData[1].accountNumber,
+            bank: this.props.collectData[1].bank,
+            phoneNumber: this.props.collectData[2].phoneNumber,
+            network: this.props.collectData[2].network,
+            registrationId: this.props.collectData[3].registrationId,
+            driverlicenseId: this.props.collectData[3].driverlicenceId,
+            vehicleRegistrationNo: this.props.collectData[3].vehicleRegistrationNo,
+            registrationDate: this.props.collectData[3].registrationDate,
+            make: this.props.collectData[3].make,
+            model: this.props.collectData[3].model,
+            colour: this.props.collectData[3].colour,
         }
         axios
         .post("http://localhost:5000/suspect/addSuspect", suspect)
@@ -57,8 +65,17 @@ export default class Case extends Component {
     render(){
         return(
             <div>
-                <h3>Cases</h3>
-                {this.props.collectedData ? this.saveCase : null}
+                <h3>Suspects</h3>
+                <Table>
+                    <tbody>
+                        {this.state.getData.map((item) => (
+                            <tr><td><CaseIndividual forenames={item.forenames} surname={item.surname} address={item.address} dateOfBirth={item.dateOfBirth}
+                            placeOfBirth={item.placeOfBirth} sex={item.sex} bankAccountId={item.bankAccountId} accountNumber={item.accountNumber} bank={item.bank}
+                            phoneNumber={item.phoneNumber} network={item.network} registrationId={item.registrationId} driverlicenseId={item.driverlicenseId}
+                            vehicleRegistrationNo={item.vehicleRegistrationNo} registrationDate={item.registrationDate} make={item.make} model={item.model} colour={item.colour}/></td></tr>
+                        ))}
+                    </tbody>
+                </Table>
             </div>
         )
     }
