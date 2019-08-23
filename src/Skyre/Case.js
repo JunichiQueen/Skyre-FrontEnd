@@ -33,6 +33,25 @@ export default class Case extends Component {
         }
     }
 
+    //under construction, concat returned associate data into getData
+    // saveAssociate = () => {
+    //     let name = "";
+
+    //     for (let i = 0; i < this.props.associateData.length; i++){
+    //         name += this.props.associateData[i].forenames + " "
+    //         name += this.props.associateData[i].lastname + ",  "
+    //     }
+    //     let associate = {
+    //         associateName: name
+    //     }
+    //     axios
+    //     .post("http://localhost:8085/suspect/addAssociate", associate)
+    //     .then(response => {
+    //         this.getCase();
+    //     })
+    //     .catch(err => console.log(err))
+    // }
+
     saveCase = () => {
         let suspect = {
             citizenId: this.props.collectData[0].citizenId,

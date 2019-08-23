@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Modal, Button, ModalBody } from 'react-bootstrap';
+import { Tab, Tabs, Modal, Button, p } from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -11,7 +11,8 @@ export default class Individual extends Component {
             show: false,
             financeData: [],
             mobileData: [],
-            vehicleData: []
+            vehicleData: [],
+            associateData: []
         }
     }
 
@@ -42,12 +43,24 @@ export default class Individual extends Component {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
+
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
+            let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
             this.setState({
                 mobileData: response.data
             })
+            axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
+                headers: { Authorization: `JWT ${accessString}`},
+            }).then(response => {
+                this.setState({
+                    associateData: response.data
+                })
+            }).catch(e => {
+                console.log(e)
+            })
+
         }).catch(e => {
             console.log(e);
         })
@@ -80,6 +93,7 @@ export default class Individual extends Component {
     handleShow = () => {
         this.getFinance();
         this.getMobile();
+        this.getVehicle();
         this.setState({
             show: true
         })
@@ -104,7 +118,7 @@ export default class Individual extends Component {
                 <Button variant="primary" onClick={this.handleShow}>
                     More details
                 </Button>
-                <Modal size="lg"
+                                <Modal size="lg"
                     show={this.state.show}
                     onHide={this.handleClose}
                     dialogClassName="modal-150w"
@@ -115,17 +129,19 @@ export default class Individual extends Component {
 
                                 <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Citizen Id:</b>{" " + citizenId}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</ModalBody>
+                                    <p><b>Citizen Id:</b>{" " + citizenId}</p>
 
-                                    <ModalBody><b>Address:</b>{" " + address}</ModalBody>
+                                    <p><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</p>
 
-                                    <ModalBody><b>Sex:</b>{" " + sex}</ModalBody>
+                                    <p><b>Address:</b>{" " + address}</p>
 
-                                    <ModalBody><b>Place Of Birth:</b>{" " + placeOfBirth}</ModalBody>
+                                    <p><b>Sex:</b>{" " + sex}</p>
 
-                                    <ModalBody><b>Date Of Birth:</b>{" " + dateOfBirth}</ModalBody>
+                                    <p><b>Place Of Birth:</b>{" " + placeOfBirth}</p>
+
+                                    <p><b>Date Of Birth:</b>{" " + dateOfBirth}</p>
 
 
                                 </Modal.Body>
@@ -135,13 +151,15 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Financial Details" title="Financial Details">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</ModalBody>
+                                    <p><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</p>
 
-                                    <ModalBody><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</ModalBody>
+                                    <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
+
+                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
 
 
                                 </Modal.Body>
@@ -149,27 +167,55 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Mobile" title="Mobile">
 
-                                <Modal.Body class="modal-body3">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</ModalBody>
+                                    <p><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</p>
+
+                                    <p><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</p>
 
                                 </Modal.Body>
 
                             </Tab>
 
-                            <Tab eventKey="Associates" title="Associates">
+                            <Tab eventKey="Vehicle" title="Vehicle">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
+                                    <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
 
-                                    <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
+                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
+
+                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
+
+                                    <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
+
+                                    <p><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</p>
+
+                                    <p><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</p>
+
+                                    <p><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</p>
 
                                 </Modal.Body>
+                            </Tab>
+
+                            <Tab eventKey="Associates" title="Associates">
+                                
+                                    {this.state.associateData.map((item) => (
+                                    <Modal.Body class="modal-body">
+                                        <br></br>
+                                        <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
+                                        <p><b>Address: </b>{" " + item.address}</p>
+                                        <p><b>Date Of Birth: </b>{" " + item.dateOfBirth}</p>
+                                        <p><b>Time: </b>{" " + item.timestamp}</p>
+                                        <p><b>CallType: </b>{" " + item.callType}</p>
+                                        <br></br>
+                                    </Modal.Body>
+                                    ))}
+
                             </Tab>
 
                         </Tabs>

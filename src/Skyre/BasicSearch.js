@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 
 export default function BasicSearch (props){
     return(
@@ -9,7 +10,7 @@ export default function BasicSearch (props){
                 <p>Surname</p>
                 <input placeholder="surname"></input>
                 <br></br>
-                <button type="submit">Search</button>
+                <Button color="info"type="submit">Search</Button>
             </form>
         </div>
     )

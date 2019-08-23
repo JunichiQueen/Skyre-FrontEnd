@@ -31,6 +31,7 @@ class NavTab extends Component {
         this.state = ({
             data: [],
             collectData: [],
+            associateData: [],
             first_name: '',
             last_name: '',
             email: '',
@@ -206,7 +207,7 @@ class NavTab extends Component {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                }} fill variant="tabs" defaultActiveKey="profile" transition={false} id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
+                }} fill variant="tabs" defaultActiveKey="profile" id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
                     <Tab eventKey="search" title="Search" onClick={this.welcomeOff}>
                         <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData}/>
                     </Tab>
