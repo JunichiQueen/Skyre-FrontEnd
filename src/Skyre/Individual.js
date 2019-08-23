@@ -14,6 +14,7 @@ export default class Individual extends Component {
             mobileData: [],
             vehicleData: [],
             associateData: [],
+            vehicleLocationData: [],
         }
     }
 
@@ -78,9 +79,18 @@ export default class Individual extends Component {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {
+                let vehicleRegistrationNo = "vehicleRegistrationNo=" + response.data[0].vehicleRegistrationNo
                 this.setState({
                     vehicleData: response.data
                 })
+                axios.get(`http://localhost:9003/scenario1/getVehicleLocation?${vehicleRegistrationNo}`, {
+                    headers: { Authorization: `JWT ${accessString}` },
+                })
+                .then(response => {
+                    this.setState({
+                        vehicleLocationData: response.data
+                    })                    
+                }).catch(e => console.log(e))
             }).catch(e => {
                 console.log(e);
             })
@@ -196,12 +206,22 @@ export default class Individual extends Component {
                                 <Modal.Body class="modal-body">
 
                                     <br></br>
+                                    <br></br>
+                                    <br></br>
 
                                     <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
 
                                     <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
 
                                     <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
+
+                                    <p><b>StreetName:</b> {" " + this.state.vehicleLocationData.map((item) => item.streetName)}</p>
+
+                                    <p><b>Latitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.latitude)}</p>
+
+                                    <p><b>Longitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.longitude)}</p>
+
+                                    <p><b>Timestamp:</b> {" " + this.state.vehicleLocationData.map((item) => item.timestamp)}</p>
 
                                     <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
 
@@ -218,6 +238,8 @@ export default class Individual extends Component {
                                 
                                     {this.state.associateData.map((item) => (
                                     <Modal.Body class="modal-body">
+                                        <br></br>
+                                        <br></br>
                                         <br></br>
                                         <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
                                         <p><b>Address: </b>{" " + item.address}</p>
