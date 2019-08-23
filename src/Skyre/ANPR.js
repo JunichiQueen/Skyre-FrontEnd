@@ -1,18 +1,83 @@
-import React, { useState } from 'react';
-import { Button, Modal }  from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Button }  from 'reactstrap';
+import axios from 'axios';
 
-export default function ANPR(){
-    const [show, setShow] = useState(false);
+export default class ANPR extends Component {
+    constructor(){
+        super();
+        this.state={
+            forenames: "",
+            surname: "",
+            homeAddress: "",
+            dateOfBirth: "",
+            vehicleRegistrationNo: "",
+            registrationDate: "",
+            driverLicenceId: "",
+            make: "",
+            model: "",
+            colour: ""
+        }
+    }
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    return(
-        <div>
-            <br></br>
-            <p>Registration Number</p>
-            <input placeholder="regNo" color="info"></input>
-            <br></br>
-            <Button>Search</Button>
-        </div>
-    )
+    getCitizenFromRegistration = (e) => {
+        e.preventDefault();
+
+        let vehicleRegNo = "vehicleRegistrationNo=" + e.target[0].value;
+
+        const accessString = localStorage.getItem('JWT');
+
+        axios.get("http://localhost:9003/scenario1/getCitizenFromRegistration?" + vehicleRegNo, {
+            headers: { Authorization: `JWT ${accessString}` },
+        }).then(response => {
+            this.setState({
+                forenames: response.data.forenames,
+                surname: response.data.surname,
+                homeAddress: "Home Address: " + response.data.homeAddress,
+                dateOfBirth: "Date Of Birth: " + response.data.dateOfBirth,
+                vehicleRegistrationNo: "Vehicle Registration Number: " + response.data.vehicleRegistrationNo,
+                registrationDate: "Registration Date: " + response.data.registrationDate,
+                driverLicenceId: "Drivers Licence ID: " + response.data.driverLicenceId,
+                make: "Vehicle Manufacturer: " + response.data.make,
+                model: "Vehicle Model: " + response.data.model,
+                colour: "Vehicle Colour: " + response.data.colour
+            })
+        }).catch(err => console.log(err))
+    }
+    render(){
+        const {
+            forenames,
+            surname,
+            homeAddress,
+            dateOfBirth,
+            vehicleRegistrationNo,
+            registrationDate,
+            driverLicenceId,
+            make,
+            model,
+            colour
+        } = this.state
+        return(
+            <div>
+                <form onSubmit={this.getCitizenFromRegistration}>
+                    <br></br>
+                    <p>Registration Number</p>
+                    <input placeholder="regNo"></input>
+                    <br></br>
+                    <Button color="info" type="submit">Search</Button>
+                </form>
+                <br></br>
+                <p>{forenames + " " + surname}</p>
+                <p>{homeAddress}</p>
+                <p>{dateOfBirth}</p>
+                <p>{vehicleRegistrationNo}</p> 
+                <p>{registrationDate}</p> 
+                <p>{driverLicenceId}</p>
+                <p>{make}</p> 
+                <p>{model}</p> 
+                <p>{colour}</p>
+            </div>
+        )   
+
+    }
+
 }
