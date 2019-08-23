@@ -11,7 +11,8 @@ export default class Individual extends Component {
             show: false,
             financeData: [],
             mobileData: [],
-            vehicleData: []
+            vehicleData: [],
+            associateData: []
         }
     }
 
@@ -42,12 +43,24 @@ export default class Individual extends Component {
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
+
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
+            let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
             this.setState({
                 mobileData: response.data
             })
+            axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
+                headers: { Authorization: `JWT ${accessString}`},
+            }).then(response => {
+                this.setState({
+                    associateData: response.data
+                })
+            }).catch(e => {
+                console.log(e)
+            })
+
         }).catch(e => {
             console.log(e);
         })
@@ -159,17 +172,40 @@ export default class Individual extends Component {
 
                             </Tab>
 
-                            <Tab eventKey="Associates" title="Associates">
+                            <Tab eventKey="ANPR" title="ANPR">
 
                                 <Modal.Body class="modal-body2">
 
-                                    <ModalBody><b>ANPR Point Id:</b>{" " + this.props.anprPointId}</ModalBody>
+                                    <ModalBody><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</ModalBody>
 
-                                    <ModalBody><b>Timestamp:</b> {" " + this.props.timestamp}</ModalBody>
+                                    <ModalBody><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</ModalBody>
 
-                                    <ModalBody><b>Vehicle Registration number:</b>{" " + this.props.vehicleRegistrationNumber}</ModalBody>
+                                    <ModalBody><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</ModalBody>
+
+                                    <ModalBody><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</ModalBody>
+
+                                    <ModalBody><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</ModalBody>
+
+                                    <ModalBody><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</ModalBody>
+
+                                    <ModalBody><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</ModalBody>
 
                                 </Modal.Body>
+                            </Tab>
+
+                            <Tab eventKey="Associates" title="Associates">
+                                
+                                    {this.state.associateData.map((item) => (
+                                    <Modal.Body class="modal-body2">
+                                        <ModalBody><b>Name: </b>{" " + item.forenames + " " + item.surname}</ModalBody>
+                                        <ModalBody><b>Address: </b>{" " + item.address}</ModalBody>
+                                        <ModalBody><b>Date Of Birth: </b>{" " + item.dateOfBirth}</ModalBody>
+                                        <ModalBody><b>Time: </b>{" " + item.timestamp}</ModalBody>
+                                        <ModalBody><b>CallType: </b>{" " + item.callType}</ModalBody>
+                                        <br></br>
+                                    </Modal.Body>
+                                    ))}
+
                             </Tab>
 
                         </Tabs>

@@ -21,7 +21,7 @@ export default class ResultList extends Component{
         return(
             <div>
                 <h2 className="text-center">Result List</h2>
-                <Button onClick={this.toggle}>Asc/Desc</Button> 
+                <Button color="link" onClick={this.toggle}>Asc/Desc</Button> 
                 <Table className="text-center" striped>
                     <tbody>
                         {this.state.order ? this.props.data.map((item) => (

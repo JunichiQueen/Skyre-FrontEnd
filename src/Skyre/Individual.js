@@ -9,6 +9,7 @@ export default class Individual extends Component {
         super();
         this.state = {
             show: false,
+            success: "",
             financeData: [],
             mobileData: [],
             vehicleData: [],
@@ -46,7 +47,6 @@ export default class Individual extends Component {
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
-            console.log("FLAG 1" + response.data[0]);
             let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
             this.setState({
                 mobileData: response.data
@@ -54,7 +54,6 @@ export default class Individual extends Component {
             axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
                 headers: { Authorization: `JWT ${accessString}`},
             }).then(response => {
-                console.log("associates:" + response.data);
                 this.setState({
                     associateData: response.data
                 })
@@ -101,6 +100,13 @@ export default class Individual extends Component {
         })
     }
 
+    collectAllDataFinal = () => {
+        this.props.collectAllData(this.props.firstname, this.props.lastname, this.props.address);
+        this.setState({
+            success: "You have successfully saved a case"
+        })
+    }
+
     render() {
         const {
             citizenId,
@@ -110,7 +116,6 @@ export default class Individual extends Component {
             dateOfBirth,
             placeOfBirth,
             sex,
-            collectAllData,
         } = this.props;
         return (
             <div>
@@ -121,10 +126,10 @@ export default class Individual extends Component {
                 <Button variant="primary" onClick={this.handleShow}>
                     More details
                 </Button>
-                <Button variant="secondary" onClick={() => collectAllData(firstname, lastname, address)}>
+                <Button variant="secondary" onClick={() => this.collectAllDataFinal()}>
                     SaveToCase
-
                 </Button>
+                <p style={{color: 'green'}}>{this.state.success}</p>
                 <Modal size="lg"
                     show={this.state.show}
                     onHide={this.handleClose}
@@ -201,12 +206,19 @@ export default class Individual extends Component {
                                 </Modal.Body>
                             </Tab>
 
-                            <Tab>
+                            <Tab eventKey="Associates" title="Associates">
                                 
-                                <Modal.Body class="modal-body2">
+                                    {this.state.associateData.map((item) => (
+                                    <Modal.Body class="modal-body2">
+                                        <ModalBody><b>Name: </b>{" " + item.forenames + " " + item.surname}</ModalBody>
+                                        <ModalBody><b>Address: </b>{" " + item.address}</ModalBody>
+                                        <ModalBody><b>Date Of Birth: </b>{" " + item.dateOfBirth}</ModalBody>
+                                        <ModalBody><b>Time: </b>{" " + item.timestamp}</ModalBody>
+                                        <ModalBody><b>CallType: </b>{" " + item.callType}</ModalBody>
+                                        <br></br>
+                                    </Modal.Body>
+                                    ))}
 
-                                    {this.state.associateData.map((item) => <ModalBody><b>Name: </b>{" " + item.forenames})</ModalBody>)}
-                                </Modal.Body>
                             </Tab>
 
                         </Tabs>

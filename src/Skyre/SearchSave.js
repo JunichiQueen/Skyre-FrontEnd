@@ -11,7 +11,6 @@ export default class SearchSave extends Component {
             nav: []
         }
     }
-    counter = 1;
 
     addToState = () => {
         for (let i = 0; i < this.state.nav.length; i++) {
