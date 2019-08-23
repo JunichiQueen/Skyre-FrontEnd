@@ -17,7 +17,7 @@ import {
   inputStyle,
 } from '../components';
 
-var URL = require('./const');
+var USER_URL = require('./const');
 
 const loading = {
   margin: '1em',
@@ -60,7 +60,7 @@ class UpdateProfile extends Component {
       },
     } = this.props;
     try {
-      const response = await axios.get(`${URL.URL}/findUser`, {
+      const response = await axios.get(`${USER_URL.USER_URL}/findUser`, {
         params: {
           username,
         },
@@ -105,7 +105,7 @@ class UpdateProfile extends Component {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${URL.URL}/updateUser`,
+        `${USER_URL.USER_URL}/updateUser`,
         {
           first_name,
           last_name,

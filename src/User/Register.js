@@ -14,7 +14,7 @@ import {
   HeaderBar,
 } from '../components';
 
-var URL = require('./const');
+var USER_URL = require('./const');
 
 const title = {
   pageTitle: 'Register Screen',
@@ -57,7 +57,7 @@ class Register extends Component {
     } else {
       try {
         const response = await axios.post(
-          `${URL.URL}/registerUser`,
+          `${USER_URL.USER_URL}/registerUser`,
           {
             first_name,
             last_name,

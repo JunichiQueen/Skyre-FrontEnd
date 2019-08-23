@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, Tabs, Modal, Button, ModalBody } from 'react-bootstrap';
 import axios from 'axios';
 
-
+import USER_URL from '../User/const';
 
 export default class Individual extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class Individual extends Component {
         // let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
         let toSend = "" + forenames + surname;
         console.log("GET FINANCE " + toSend)
-        axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
+        axios.get(`${USER_URL.USER_URL}/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
@@ -46,7 +46,7 @@ export default class Individual extends Component {
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
         console.log("GET MOBILE " + toSend)
-        axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
+        axios.get(`${USER_URL.USER_URL}/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
@@ -66,7 +66,7 @@ export default class Individual extends Component {
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
         console.log("GET VEHICLE " + toSend)
-        axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
+        axios.get(`${USER_URL.USER_URL}/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {

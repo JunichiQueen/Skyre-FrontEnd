@@ -14,7 +14,7 @@ import {
     HeaderBar,
 } from '../components';
 
-var URL = require('../User/const');
+var USER_URL = require('../User/const');
 
 const title = {
     pageTitle: 'Home',
@@ -53,7 +53,7 @@ class NavTab extends Component {
         let anprObj = {};
         const accessString = localStorage.getItem('JWT');
         axios
-            .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
+            .get(`${USER_URL.USER_URL}/scenario1/getBasicCitizens?${appender}`, {
                 params: {
                     appender,
                 },
@@ -107,7 +107,7 @@ class NavTab extends Component {
             });
         } else {
             try {
-                const response = await axios.get(`${URL.URL}/findUser`, {
+                const response = await axios.get(`${USER_URL.USER_URL}/findUser`, {
                     params: {
                         username,
                     },
@@ -148,7 +148,7 @@ class NavTab extends Component {
 
         let toSend = "" + forenames + surname;
 
-        axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
+        axios.get(`${USER_URL.USER_URL}/scenario1/getBasicCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             console.log(response);
@@ -175,7 +175,7 @@ class NavTab extends Component {
         let sex = "sex=" + e.target[6].value;
         let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
 
-        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?${toSend}`, {
+        axios.get(`${USER_URL.USER_URL}/scenario1/getAdvCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
 

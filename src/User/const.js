@@ -1,6 +1,6 @@
 
-const URL = `http://localhost:9003`;
+const USER_URL = `http://localhost:9003`;
 
 module.exports = {
-    URL: URL
+    USER_URL: USER_URL
 };

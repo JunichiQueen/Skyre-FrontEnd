@@ -17,7 +17,7 @@ import {
   inputStyle,
 } from '../components';
 
-var URL = require('./const');
+var USER_URL = require('./const');
 
 const loading = {
   margin: '1em',
@@ -57,7 +57,7 @@ class UpdatePassword extends Component {
         },
       } = this.props;
       try {
-        const response = await axios.get(`${URL.URL}/findUser`, {
+        const response = await axios.get(`${USER_URL.USER_URL}/findUser`, {
           params: {
             username,
           },
@@ -97,7 +97,7 @@ class UpdatePassword extends Component {
       const { username, password } = this.state;
       try {
         const response = await axios.put(
-          `${URL.URL}/updatePassword`,
+          `${USER_URL.USER_URL}/updatePassword`,
           {
             username,
             password,

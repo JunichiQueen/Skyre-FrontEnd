@@ -14,7 +14,7 @@ import {
   HeaderBar,
 } from '../components';
 
-var URL = require('./const');
+var USER_URL = require('./const');
 
 const title = {
   pageTitle: 'Login Screen',
@@ -50,7 +50,7 @@ class Login extends Component {
       });
     } else {
       try {
-        const response = await axios.post(`${URL.URL}/loginUser`, {
+        const response = await axios.post(`${USER_URL.USER_URL}/loginUser`, {
           username,
           password,
         });
