@@ -27,12 +27,6 @@ export default class Search extends Component {
             showAdvanced: !this.state.showAdvanced
         })
     }
-    
-    // toggle = () => {
-    //     this.setState({ 
-    //         collapse: !this.state.collapse 
-    //     });
-    // }
 
     openNav() {
         document.getElementById("mySidebar").style.width = "400px";
@@ -53,16 +47,16 @@ export default class Search extends Component {
                 <div id="mySidebar" class="sidebar">
                     
                     <Button color="danger" onClick={this.closeNav}>CloseSavebar</Button>
-                            <SearchSave data={this.props.data} />
+                    <SearchSave data={this.props.data} />
                 </div>
                 <div id="main">
-                            <Button color="primary" onClick={this.openNav} style={{marginBottom: '1rem' }}>OpenSaveBar</Button>
+                    <Button color="primary" onClick={this.openNav} style={{marginBottom: '1rem' }}>OpenSaveBar</Button>
 
-                            {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic} />}
-                            <br></br>
-                            <Button outline onClick={this.openAdvancedSearch} size="sm">ToggleAdvanced</Button>
+                    {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic} />}
+                    <br></br>
+                    <Button outline onClick={this.openAdvancedSearch} size="sm">ToggleAdvanced</Button>
 
-                            <ResultList data={this.props.data} collectAllData={this.props.collectAllData}/>
+                    <ResultList data={this.props.data} collectAllData={this.props.collectAllData}/>
                 </div>
             </div>
         );

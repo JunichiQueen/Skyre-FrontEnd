@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Modal, Button, ModalBody } from 'react-bootstrap';
+import { Tab, Tabs, Modal, Button, p } from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -141,17 +141,19 @@ export default class Individual extends Component {
 
                                 <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Citizen Id:</b>{" " + citizenId}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</ModalBody>
+                                    <p><b>Citizen Id:</b>{" " + citizenId}</p>
 
-                                    <ModalBody><b>Address:</b>{" " + address}</ModalBody>
+                                    <p><b>Name:</b> {"\n"} {" " + firstname + " "}{lastname}</p>
 
-                                    <ModalBody><b>Sex:</b>{" " + sex}</ModalBody>
+                                    <p><b>Address:</b>{" " + address}</p>
 
-                                    <ModalBody><b>Place Of Birth:</b>{" " + placeOfBirth}</ModalBody>
+                                    <p><b>Sex:</b>{" " + sex}</p>
 
-                                    <ModalBody><b>Date Of Birth:</b>{" " + dateOfBirth}</ModalBody>
+                                    <p><b>Place Of Birth:</b>{" " + placeOfBirth}</p>
+
+                                    <p><b>Date Of Birth:</b>{" " + dateOfBirth}</p>
 
 
                                 </Modal.Body>
@@ -161,13 +163,15 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Financial Details" title="Financial Details">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</ModalBody>
+                                    <p><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</p>
 
-                                    <ModalBody><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</ModalBody>
+                                    <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
+
+                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
 
 
                                 </Modal.Body>
@@ -175,33 +179,37 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Mobile" title="Mobile">
 
-                                <Modal.Body class="modal-body3">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</ModalBody>
+                                    <p><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</p>
+
+                                    <p><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</p>
 
                                 </Modal.Body>
 
                             </Tab>
 
-                            <Tab eventKey="ANPR" title="ANPR">
+                            <Tab eventKey="Vehicle" title="Vehicle">
 
-                                <Modal.Body class="modal-body2">
+                                <Modal.Body class="modal-body">
 
-                                    <ModalBody><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</ModalBody>
+                                    <br></br>
 
-                                    <ModalBody><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</ModalBody>
+                                    <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
 
-                                    <ModalBody><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</ModalBody>
+                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
 
-                                    <ModalBody><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</ModalBody>
+                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
 
-                                    <ModalBody><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</ModalBody>
+                                    <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
 
-                                    <ModalBody><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</ModalBody>
+                                    <p><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</p>
 
-                                    <ModalBody><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</ModalBody>
+                                    <p><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</p>
+
+                                    <p><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</p>
 
                                 </Modal.Body>
                             </Tab>
@@ -209,12 +217,13 @@ export default class Individual extends Component {
                             <Tab eventKey="Associates" title="Associates">
                                 
                                     {this.state.associateData.map((item) => (
-                                    <Modal.Body class="modal-body2">
-                                        <ModalBody><b>Name: </b>{" " + item.forenames + " " + item.surname}</ModalBody>
-                                        <ModalBody><b>Address: </b>{" " + item.address}</ModalBody>
-                                        <ModalBody><b>Date Of Birth: </b>{" " + item.dateOfBirth}</ModalBody>
-                                        <ModalBody><b>Time: </b>{" " + item.timestamp}</ModalBody>
-                                        <ModalBody><b>CallType: </b>{" " + item.callType}</ModalBody>
+                                    <Modal.Body class="modal-body">
+                                        <br></br>
+                                        <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
+                                        <p><b>Address: </b>{" " + item.address}</p>
+                                        <p><b>Date Of Birth: </b>{" " + item.dateOfBirth}</p>
+                                        <p><b>Time: </b>{" " + item.timestamp}</p>
+                                        <p><b>CallType: </b>{" " + item.callType}</p>
                                         <br></br>
                                     </Modal.Body>
                                     ))}
