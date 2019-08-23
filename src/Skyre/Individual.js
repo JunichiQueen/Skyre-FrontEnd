@@ -15,6 +15,7 @@ export default class Individual extends Component {
             vehicleData: [],
             associateData: [],
             vehicleLocationData: [],
+            transactionData: []
         }
     }
 
@@ -29,9 +30,17 @@ export default class Individual extends Component {
         axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
+            let accountNumber = "accountNumber=" + response.data[0].accountNumber
             this.setState({
                 financeData: response.data
             })
+            axios.get(`http://localhost:9003/scenario1/getTransactions?${accountNumber}`, {
+                headers: { Authorization: `JWT ${accessString}`},
+            }).then(response => {
+                this.setState({
+                    transactionData: response.data
+                })
+            }).catch(e => console.log(e))
         }).catch(e => {
             console.log(e);
         })
@@ -181,8 +190,21 @@ export default class Individual extends Component {
 
                                     <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
 
-                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
+                                    <p><b>StreetName:</b> {" " + this.state.transactionData.map((item => item.streetName))}</p>
 
+                                    <p><b>Latitude:</b> {" " + this.state.transactionData.map((item => item.latitude))}</p>
+
+                                    <p><b>Longitude:</b> {" " + this.state.transactionData.map((item => item.longitude))}</p>
+
+                                    <p><b>Company:</b> {" " + this.state.transactionData.map((item => item.company))}</p>
+
+                                    <p><b>Type:</b> {" " + this.state.transactionData.map((item => item.type))}</p>
+
+                                    <p><b>Amount:</b> {" " + this.state.transactionData.map((item => item.amount))}</p>
+
+                                    <p><b>Timestamp:</b> {" " + this.state.transactionData.map((item => item.timestamp))}</p>
+
+                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
 
                                 </Modal.Body>
 
