@@ -69,6 +69,8 @@ export default class ANPR extends Component {
         } = this.state
         return(
             <div>
+                <br></br>
+                <br></br>
                 <form onSubmit={this.getCitizenFromRegistration}>
                     <br></br>
                     <p>Registration Number</p>

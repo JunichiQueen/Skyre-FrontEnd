@@ -44,7 +44,7 @@ export default class Search extends Component {
 
         return (
             <div>
-                <div id="mySidebar" class="sidebar">
+                <div id="mySidebar" className="sidebar">
                     <SearchSave data={this.props.data} />
                 </div>
                 <div id="main">

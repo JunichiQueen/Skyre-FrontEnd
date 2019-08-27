@@ -168,7 +168,7 @@ export default class Individual extends Component {
                         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                             <Tab eventKey="Biography" title="Biography">
 
-                                <Modal.Body class="modal-body">
+                                <Modal.Body className="modal-body">
 
                                     <br></br>
 
@@ -192,7 +192,7 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Financial Details" title="Financial Details">
 
-                                <Modal.Body class="modal-body">
+                                <Modal.Body className="modal-body">
 
                                     <br></br>
 
@@ -220,7 +220,7 @@ export default class Individual extends Component {
                             </Tab>
                             <Tab eventKey="Mobile" title="Mobile">
 
-                                <Modal.Body class="modal-body">
+                                <Modal.Body className="modal-body">
 
                                     <br></br>
 
@@ -234,7 +234,7 @@ export default class Individual extends Component {
 
                             <Tab eventKey="Vehicle" title="Vehicle">
 
-                                <Modal.Body class="modal-body">
+                                <Modal.Body className="modal-body">
 
                                     <br></br>
 
@@ -267,7 +267,7 @@ export default class Individual extends Component {
                             <Tab eventKey="Associates" title="Associates">
                                 
                                     {this.state.associateData.map((item) => (
-                                    <Modal.Body class="modal-body">
+                                    <Modal.Body className="modal-body">
 
                                         <br></br>
                                         <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
@@ -287,7 +287,7 @@ export default class Individual extends Component {
                     </Modal.Header>
 
 
-                    <Modal.Footer class="modal-footer">
+                    <Modal.Footer className="modal-footer">
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>

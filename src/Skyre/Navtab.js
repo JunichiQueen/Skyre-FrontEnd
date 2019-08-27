@@ -241,14 +241,6 @@ class NavTab extends Component {
                     <Tab eventKey="anpr" title="ANPR">
                         <ANPR />
                     </Tab>
-                    <Tab eventKey="user" title="User">
-                        <Button
-                            style={logoutButton}
-                            variant="contained"
-                            color="primary"
-                            onClick={this.logout}
-                        ></Button>
-                    </Tab>
                     <Tab eventKey="case" title="Case">
                         <Case collectData={this.state.collectData}/>
                     </Tab>

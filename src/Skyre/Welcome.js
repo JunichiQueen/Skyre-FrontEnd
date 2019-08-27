@@ -3,6 +3,9 @@ import React from 'react';
 export default function WelcomePage(){
     return(
         <div>
+            <br></br>
+            <br></br>
+            <br></br>
             <h3>Welcome to Skyre</h3>
             <br></br>
             <p>The tabs above will allow you to navigate between Search, Map and Case Functions</p>
