@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, Modal, Button, p } from 'react-bootstrap';
 import axios from 'axios';
+import './SearchStyle.css';
 
 
 
@@ -23,18 +24,21 @@ export default class Individual extends Component {
 
         const accessString = localStorage.getItem('JWT');
 
+        const username = "username=" + localStorage.getItem('username');
+
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname;
+        let toSend = "" + forenames + surname + username;
 
         axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
-            let accountNumber = "accountNumber=" + response.data[0].accountNumber
+            let accountNumber = "accountNumber=" + response.data[0].accountNumber + "&";
+            let toSend = "" + accountNumber + username;
             this.setState({
                 financeData: response.data
             })
-            axios.get(`http://localhost:9003/scenario1/getTransactions?${accountNumber}`, {
+            axios.get(`http://localhost:9003/scenario1/getTransactions?${toSend}`, {
                 headers: { Authorization: `JWT ${accessString}`},
             }).then(response => {
                 this.setState({
@@ -50,18 +54,21 @@ export default class Individual extends Component {
 
         const accessString = localStorage.getItem('JWT');
 
+        const username = "username=" + localStorage.getItem('username');
+        
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname;
+        let toSend = "" + forenames + surname + username;
 
         axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
-            let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
+            let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber + "&";
+            let toSend = "" + phoneNumber + username;
             this.setState({
                 mobileData: response.data
             })
-            axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
+            axios.get(`http://localhost:9003/scenario1/getAssociates?${toSend}`, {
                 headers: { Authorization: `JWT ${accessString}`},
             }).then(response => {
                 this.setState({
@@ -80,19 +87,22 @@ export default class Individual extends Component {
 
         const accessString = localStorage.getItem('JWT');
 
+        const username = "username=" + localStorage.getItem('username');
+
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname;
+        let toSend = "" + forenames + surname + username;
 
         axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {
-                let vehicleRegistrationNo = "vehicleRegistrationNo=" + response.data[0].vehicleRegistrationNo
+                let vehicleRegistrationNo = "vehicleRegistrationNo=" + response.data[0].vehicleRegistrationNo + "&";
+                let toSend = "" + vehicleRegistrationNo + username;
                 this.setState({
                     vehicleData: response.data
                 })
-                axios.get(`http://localhost:9003/scenario1/getVehicleLocation?${vehicleRegistrationNo}`, {
+                axios.get(`http://localhost:9003/scenario1/getVehicleLocation?${toSend}`, {
                     headers: { Authorization: `JWT ${accessString}` },
                 })
                 .then(response => {
@@ -143,10 +153,10 @@ export default class Individual extends Component {
                 <p>{address}</p>
 
                 <Button variant="primary" onClick={this.handleShow}>
-                    More details
+                    More Details
                 </Button>
                 <Button variant="secondary" onClick={() => this.collectAllDataFinal()}>
-                    SaveToCase
+                    Save To Case
                 </Button>
                 <p style={{color: 'green'}}>{this.state.success}</p>
                 <Modal size="lg"
@@ -188,23 +198,22 @@ export default class Individual extends Component {
 
                                     <p><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</p>
 
+                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p> 
+
                                     <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
 
-                                    <p><b>StreetName:</b> {" " + this.state.transactionData.map((item => item.streetName))}</p>
-
-                                    <p><b>Latitude:</b> {" " + this.state.transactionData.map((item => item.latitude))}</p>
-
-                                    <p><b>Longitude:</b> {" " + this.state.transactionData.map((item => item.longitude))}</p>
-
-                                    <p><b>Company:</b> {" " + this.state.transactionData.map((item => item.company))}</p>
-
-                                    <p><b>Type:</b> {" " + this.state.transactionData.map((item => item.type))}</p>
-
-                                    <p><b>Amount:</b> {" " + this.state.transactionData.map((item => item.amount))}</p>
-
-                                    <p><b>Timestamp:</b> {" " + this.state.transactionData.map((item => item.timestamp))}</p>
-
-                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
+                                    {this.state.transactionData.map((item) => (
+                                        <div style={{ borderTop: "3px dotted blue"}}>
+                                            <h6>Transaction</h6>
+                                            <p><b>StreetName:</b>{item.streetName}</p>
+                                            <p><b>Latitude:</b>{item.latitude}</p>
+                                            <p><b>Longitude:</b>{item.longitude}</p>
+                                            <p><b>Company:</b>{item.company}</p>
+                                            <p><b>Type:</b>{item.type}</p>
+                                            <p><b>Amount:</b>{item.amount}</p>
+                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                        </div>
+                                    ))}
 
                                 </Modal.Body>
 
@@ -228,30 +237,29 @@ export default class Individual extends Component {
                                 <Modal.Body class="modal-body">
 
                                     <br></br>
-                                    <br></br>
-                                    <br></br>
 
                                     <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
 
-                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
-
-                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
-
-                                    <p><b>StreetName:</b> {" " + this.state.vehicleLocationData.map((item) => item.streetName)}</p>
-
-                                    <p><b>Latitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.latitude)}</p>
-
-                                    <p><b>Longitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.longitude)}</p>
-
-                                    <p><b>Timestamp:</b> {" " + this.state.vehicleLocationData.map((item) => item.timestamp)}</p>
-
                                     <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
+
+                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
 
                                     <p><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</p>
 
                                     <p><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</p>
 
                                     <p><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</p>
+
+                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
+
+                                    {this.state.vehicleLocationData.map((item) => (
+                                        <div style={{ borderTop: "3px dotted blue"}}>
+                                            <p><b>StreetName:</b>{item.streetName}</p>
+                                            <p><b>Latitude:</b>{item.latitude}</p>
+                                            <p><b>Longitude:</b>{item.longitude}</p>
+                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                        </div>
+                                    ))}
 
                                 </Modal.Body>
                             </Tab>
@@ -260,8 +268,7 @@ export default class Individual extends Component {
                                 
                                     {this.state.associateData.map((item) => (
                                     <Modal.Body class="modal-body">
-                                        <br></br>
-                                        <br></br>
+
                                         <br></br>
                                         <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
                                         <p><b>Address: </b>{" " + item.address}</p>

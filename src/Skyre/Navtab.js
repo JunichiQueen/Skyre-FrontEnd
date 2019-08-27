@@ -41,6 +41,7 @@ class NavTab extends Component {
             deleted: false,
             error: false,
             welcome: true,
+            spinner: false
         })
     }
 
@@ -90,28 +91,44 @@ class NavTab extends Component {
     getBasic = (e) => {
         e.preventDefault();
 
+        this.setState({
+            spinner: true
+        })
+
         const accessString = localStorage.getItem('JWT');
 
-        let forenames = "forenames=" + e.target[0].value + "&";
-        let surname = "surname=" + e.target[1].value;
+        const username = "username=" + localStorage.getItem('username');        
 
-        let toSend = "" + forenames + surname;
+        let forenames = "forenames=" + e.target[0].value + "&";
+        let surname = "surname=" + e.target[1].value + "&";
+
+        let toSend = "" + forenames + surname + username;
 
         axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
-                data: response.data
+                data: response.data,
+                spinner: false
             })
         }).catch(e => {
             console.log(e);
+            this.setState({
+                spinner: false
+            })
         })
     }
 
     getAdvanced = (e) => {
         e.preventDefault();
 
+        this.setState({
+            spinner: true
+        })
+
         const accessString = localStorage.getItem('JWT');
+
+        const username = "username=" + localStorage.getItem('username');
 
         let forenames = "forenames=" + e.target[0].value + "&";
         let surname = "surname=" + e.target[1].value + "&";
@@ -119,16 +136,22 @@ class NavTab extends Component {
         let homeAddress = "homeAddress=" + e.target[3].value + "&";
         let dateOfBirth = "dateOfBirth=" + e.target[4].value + "&";
         let placeOfBirth = "placeOfBirth=" + e.target[5].value + "&";
-        let sex = "sex=" + e.target[6].value;
-        let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
+        let sex = "sex=" + e.target[6].value + "&";
+        let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex + username;
 
         axios.get(`http://localhost:9003/scenario1/getAdvCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
-                data: response.data
+                data: response.data,
+                spinner: false
             })
-        }).catch(e => { console.log(e); })
+        }).catch(e => {
+            console.log(e);
+            this.setState({
+                spinner: false
+            })
+        })
     }
 
     collectAllData = (forename, surname, address) => {
@@ -209,7 +232,8 @@ class NavTab extends Component {
                     justifyContent: 'center',
                 }} fill variant="tabs" defaultActiveKey="profile" id="uncontrolled-tab-example" onSelect={this.welcomeOff}>
                     <Tab eventKey="search" title="Search" onClick={this.welcomeOff}>
-                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData}/>
+                        <Search getBasic={this.getBasic} getAdvanced={this.getAdvanced} addToSave={this.addToSave} data={this.state.data} collectAllData={this.collectAllData}
+                        spinner={this.state.spinner}/>
                     </Tab>
                     <Tab eventKey="map" title="Map">
                         <Map />

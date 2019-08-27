@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, Spinner } from 'reactstrap';
 import _ from 'lodash';
 
 import Individual from './Individual.js';
@@ -8,7 +8,7 @@ export default class ResultList extends Component{
     constructor(props){
         super();
         this.state = {
-            order: true
+            display: false
         }
     }
 
@@ -17,11 +17,15 @@ export default class ResultList extends Component{
             order: !this.state.order
         })
     }
+
     render(){
         return(
             <div>
-                <h2 className="text-center">Result List</h2>
-                <Button color="link" onClick={this.toggle}>Asc/Desc</Button> 
+                <h2 className="text-center">Citizens</h2>
+
+                <Button color="link" onClick={this.toggle}>Asc/Desc</Button>
+                <br></br>
+                {this.props.spinner ? <Spinner /> : null}
                 <Table className="text-center" striped>
                     <tbody>
                         {this.state.order ? this.props.data.map((item) => (
