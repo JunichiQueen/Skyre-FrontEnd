@@ -4,6 +4,8 @@ import { Button } from 'reactstrap';
 export default function BasicSearch (props){
     return(
         <div>
+            <br></br>
+            <br></br>
             <form onSubmit={props.getBasic}>
                 <p>Forename</p>
                 <input placeholder="forename"></input>

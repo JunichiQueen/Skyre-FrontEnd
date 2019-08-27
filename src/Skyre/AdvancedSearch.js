@@ -4,6 +4,8 @@ import { Button } from 'reactstrap';
 export default function AdvancedSearch (props){
     return(
         <div>
+            <br></br>
+            <br></br>
             <form onSubmit={props.getAdvanced}>
                 <p>Forename</p>
                 <input placeholder="forename"></input>

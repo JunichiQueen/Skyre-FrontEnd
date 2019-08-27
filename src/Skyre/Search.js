@@ -12,13 +12,13 @@ export default class Search extends Component {
         super();
         this.state = {
             showAdvanced: "",
-            collapse: false
+            collapse: true
         };
     }
 
-    openSaveBar = () => {
+    toggleCollapse = () => {
         this.setState({
-            showSaver: !this.state.showSaver
+            collapse: !this.state.collapse
         })
     }
     openAdvancedSearch = () => {
@@ -27,14 +27,15 @@ export default class Search extends Component {
         })
     }
 
-    openNav() {
-        document.getElementById("mySidebar").style.width = "400px";
-        document.getElementById("main").style.marginLeft = "400px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
+    toggleNav = () => {
+        this.toggleCollapse();
+        if (this.state.collapse) {
+            document.getElementById("mySidebar").style.width = "400px";
+            document.getElementById("main").style.marginLeft = "400px";
+        } else {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+        }
     }
 
 
@@ -44,16 +45,14 @@ export default class Search extends Component {
         return (
             <div>
                 <div id="mySidebar" class="sidebar">
-                    
-                    <Button color="danger" onClick={this.closeNav} style={{ borderRadius: "100%" }}>CloseSavebar</Button>
                     <SearchSave data={this.props.data} />
                 </div>
                 <div id="main">
-                    <Button color="primary" onClick={this.openNav} style={{ 
+                    <Button color="primary" onClick={this.toggleNav} style={{ 
                         float: "left",
                         padding: "0px",
                         borderRadius: "100%"
-                     }}>OpenSaveBar</Button>
+                     }}>SaveBar</Button>
 
                     {this.state.showAdvanced ? <AdvancedSearch getAdvanced={this.props.getAdvanced} /> : <BasicSearch getBasic={this.props.getBasic}/>}
                     <br></br>
