@@ -2,19 +2,16 @@ import React from 'react';
 
 export default function CaseIndividual (props){
     const {
-            citizenId,
             forenames,
             surname,
             homeAddress,
             dateOfBirth,
             placeOfBirth,
             sex,
-            bankAccountId,
             accountNumber,
             bank,
             phoneNumber,
             network,
-            registrationId,
             driverLicenceId,
             vehicleRegistrationNo,
             registrationDate,

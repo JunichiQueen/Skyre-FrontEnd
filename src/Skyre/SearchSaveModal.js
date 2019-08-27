@@ -135,7 +135,7 @@ export default class Individual extends Component {
                 <p style={{ color: "#f1f1f1"}}>{address}</p>
 
                 <Button variant="primary" onClick={this.handleShow}>
-                    More details
+                    More Details
                 </Button>
                 <Modal size="lg"
                     show={this.state.show}
@@ -176,23 +176,21 @@ export default class Individual extends Component {
 
                                     <p><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</p>
 
+                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
+
                                     <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
 
-                                    <p><b>StreetName:</b> {" " + this.state.transactionData.map((item => item.streetName))}</p>
-
-                                    <p><b>Latitude:</b> {" " + this.state.transactionData.map((item => item.latitude))}</p>
-
-                                    <p><b>Longitude:</b> {" " + this.state.transactionData.map((item => item.longitude))}</p>
-
-                                    <p><b>Company:</b> {" " + this.state.transactionData.map((item => item.company))}</p>
-
-                                    <p><b>Type:</b> {" " + this.state.transactionData.map((item => item.type))}</p>
-
-                                    <p><b>Amount:</b> {" " + this.state.transactionData.map((item => item.amount))}</p>
-
-                                    <p><b>Timestamp:</b> {" " + this.state.transactionData.map((item => item.timestamp))}</p>
-
-                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
+                                    {this.state.transactionData.map((item) => (
+                                        <div style={{ borderTop: "3px dotted blue"}}>
+                                            <p><b>StreetName:</b>{item.streetName}</p>
+                                            <p><b>Latitude:</b>{item.latitude}</p>
+                                            <p><b>Longitude:</b>{item.longitude}</p>
+                                            <p><b>Company:</b>{item.company}</p>
+                                            <p><b>Type:</b>{item.type}</p>
+                                            <p><b>Amount:</b>{item.amount}</p>
+                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                        </div>
+                                    ))}
 
                                 </Modal.Body>
 
@@ -221,25 +219,26 @@ export default class Individual extends Component {
 
                                     <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
 
-                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
-
-                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
-
-                                    <p><b>StreetName:</b> {" " + this.state.vehicleLocationData.map((item) => item.streetName)}</p>
-
-                                    <p><b>Latitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.latitude)}</p>
-
-                                    <p><b>Longitude:</b> {" " + this.state.vehicleLocationData.map((item) => item.longitude)}</p>
-
-                                    <p><b>Timestamp:</b> {" " + this.state.vehicleLocationData.map((item) => item.timestamp)}</p>
-
                                     <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
+
+                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
 
                                     <p><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</p>
 
                                     <p><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</p>
 
                                     <p><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</p>
+
+                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
+
+                                    {this.state.vehicleLocationData.map((item) => (
+                                        <div style={{ borderTop: "3px dotted blue"}}>
+                                            <p><b>StreetName:</b>{item.streetName}</p>
+                                            <p><b>Latitude:</b>{item.latitude}</p>
+                                            <p><b>Longitude:</b>{item.longitude}</p>
+                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                        </div>
+                                    ))}
 
                                 </Modal.Body>
                             </Tab>

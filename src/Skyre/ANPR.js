@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button }  from 'reactstrap';
+import { Button, Spinner }  from 'reactstrap';
 import axios from 'axios';
 
 export default class ANPR extends Component {
@@ -15,12 +15,17 @@ export default class ANPR extends Component {
             driverLicenceId: "",
             make: "",
             model: "",
-            colour: ""
+            colour: "",
+            Spinner: false
         }
     }
 
     getCitizenFromRegistration = (e) => {
         e.preventDefault();
+
+        this.setState({
+            spinner: true
+        })
 
         let vehicleRegNo = "vehicleRegistrationNo=" + e.target[0].value;
 
@@ -39,9 +44,15 @@ export default class ANPR extends Component {
                 driverLicenceId: "Drivers Licence ID: " + response.data.driverLicenceId,
                 make: "Vehicle Manufacturer: " + response.data.make,
                 model: "Vehicle Model: " + response.data.model,
-                colour: "Vehicle Colour: " + response.data.colour
+                colour: "Vehicle Colour: " + response.data.colour,
+                spinner: false
             })
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            this.setState({
+                spinner: false
+            })        
+        })
     }
     render(){
         const {
@@ -66,6 +77,7 @@ export default class ANPR extends Component {
                     <Button color="info" type="submit">Search</Button>
                 </form>
                 <br></br>
+                {this.state.spinner ? <Spinner /> : null}
                 <p>{forenames + " " + surname}</p>
                 <p>{homeAddress}</p>
                 <p>{dateOfBirth}</p>
