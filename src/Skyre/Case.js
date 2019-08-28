@@ -13,8 +13,12 @@ export default class Case extends Component {
     }
 
     getCase = () => {
+
+        const accessString = localStorage.getItem('JWT');
+
         axios
-        .get("http://localhost:8085/suspect/")
+        .get("http://localhost:9003/scenario1/getCases", {
+            headers: { Authorization: `JWT ${accessString}` }, })
         .then(response => {
             this.setState({
                 getData: response.data
@@ -53,6 +57,11 @@ export default class Case extends Component {
     // }
 
     saveCase = () => {
+
+        const accessString = localStorage.getItem('JWT');
+
+        const username = "username=" + localStorage.getItem('username'); 
+
         let suspect = {
             citizenId: this.props.collectData[0].citizenId,
             forenames: this.props.collectData[0].forenames,
@@ -75,7 +84,8 @@ export default class Case extends Component {
             colour: this.props.collectData[3].colour,
         }
         axios
-        .post("http://localhost:8085/suspect/addSuspect", suspect)
+        .post(`http://localhost:9003/scenario1/postCase?${username}`, suspect, {
+            headers: { Authorization: `JWT ${accessString}` }, })
         .then(response => {
             this.getCase();
         })
