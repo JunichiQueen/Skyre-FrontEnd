@@ -142,11 +142,13 @@ export default class Individual extends Component {
                     onHide={this.handleClose}
                     dialogClassName="modal-150w"
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton><Modal.Title>{firstname}'s Details</Modal.Title>
+                    </Modal.Header>
                         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                            
                             <Tab eventKey="Biography" title="Biography">
 
-                                <Modal.Body className="modal-body">
+                                <div className="div">
 
                                     <br></br>
 
@@ -162,93 +164,100 @@ export default class Individual extends Component {
 
                                     <p><b>Date Of Birth:</b>{" " + dateOfBirth}</p>
 
-
-                                </Modal.Body>
-
-
+                                </div>
 
                             </Tab>
+                            
                             <Tab eventKey="Financial Details" title="Financial Details">
 
-                                <Modal.Body className="modal-body">
+                                <div className="div">
 
                                     <br></br>
 
-                                    <p><b>Bank Account Id:</b>{" " + this.state.financeData.map((item) => item.bankAccountId)}</p>
-
-                                    <p><b>Bank</b>{" " + this.state.financeData.map((item) => item.bank)}</p>
-
-                                    <p><b>Bank Account Number:</b> {" " + this.state.financeData.map((item => item.accountNumber))}</p>
-
-                                    {this.state.transactionData.map((item) => (
-                                        <div style={{ borderTop: "3px dotted blue"}}>
-                                            <p><b>StreetName:</b>{item.streetName}</p>
-                                            <p><b>Latitude:</b>{item.latitude}</p>
-                                            <p><b>Longitude:</b>{item.longitude}</p>
-                                            <p><b>Company:</b>{item.company}</p>
-                                            <p><b>Type:</b>{item.type}</p>
-                                            <p><b>Amount:</b>{item.amount}</p>
-                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                    {this.state.financeData.map((item) => (
+                                        <div style={{ border: "3px dotted green"}}>
+                                            <h6>Bank Information</h6>
+                                            <p><b>Bank Account Id:</b>{" " + item.bankAccountId}</p>
+                                            <p><b>Bank:</b>{" " + item.bank}</p>
+                                            <p><b>Bank Account Number:</b>{" " + item.accountNumber}</p>
                                         </div>
                                     ))}
 
-                                </Modal.Body>
+                                    {this.state.transactionData.map((item) => (
+                                        <div style={{ border: "3px dotted blue"}}>
+                                            <h6>Transaction</h6>
+                                            <p><b>Bank Account Number:</b>{" " + item.accountNumber}</p>
+                                            <p><b>StreetName:</b>{" " + item.streetName}</p>
+                                            <p><b>Latitude:</b>{" " + item.latitude}</p>
+                                            <p><b>Longitude:</b>{" " + item.longitude}</p>
+                                            <p><b>Company:</b>{" " + item.company}</p>
+                                            <p><b>Type:</b>{" " + item.type}</p>
+                                            <p><b>Amount:</b>{" " + item.amount}</p>
+                                            <p><b>TimeStamp:</b>{" " + item.timestamp}</p>
+                                        </div>
+                                    ))}
+
+                                </div>
 
                             </Tab>
+
                             <Tab eventKey="Mobile" title="Mobile">
 
-                                <Modal.Body className="modal-body">
+                                <div className="div">
 
                                     <br></br>
 
-                                    <p><b>Phone Number:</b>{" " + this.state.mobileData.map((item) => item.phoneNumber)}</p>
+                                    {this.state.mobileData.map((item) => (
+                                        <div>
+                                            <br></br>
+                                            <p><b>Phone Number:</b>{" " + item.phoneNumber}</p>
+                                            <p><b>Network:</b>{" " + item.network}</p>
+                                            <br></br>
+                                        </div>
+                                    ))}
 
-                                    <p><b>Network:</b> {" " + this.state.mobileData.map((item) => item.network)}</p>
-
-                                </Modal.Body>
+                                </div>
 
                             </Tab>
 
                             <Tab eventKey="Vehicle" title="Vehicle">
 
-                                <Modal.Body className="modal-body">
+                                <div className="div">
 
                                     <br></br>
-                                    <br></br>
-                                    <br></br>
 
-                                    <p><b>Registration Id:</b>{" " + this.state.vehicleData.map((item) => item.registrationId)}</p>
-
-                                    <p><b>Registration Date:</b> {" " + this.state.vehicleData.map((item) => item.registrationDate)}</p>
-
-                                    <p><b>Drivers License Id:</b> {" " + this.state.vehicleData.map((item) => item.driverLicenceId)}</p>
-
-                                    <p><b>Make:</b> {" " + this.state.vehicleData.map((item) => item.make)}</p>
-
-                                    <p><b>Model:</b> {" " + this.state.vehicleData.map((item) => item.model)}</p>
-
-                                    <p><b>Colour:</b> {" " + this.state.vehicleData.map((item) => item.colour)}</p>
-
-                                    <p><b>Vehicle Registration No:</b> {" " + this.state.vehicleData.map((item) => item.vehicleRegistrationNo)}</p>
+                                    {this.state.vehicleData.map((item) => (
+                                        <div style={{ border: "3px dotted green" }}>
+                                            <h6>Vehicle Information</h6>
+                                            <p><b>Registration Id:</b>{" " + item.registrationId}</p>
+                                            <p><b>Registration Date:</b>{" " + item.registrationDate}</p>
+                                            <p><b>Drivers License Id:</b>{" " + item.driverLicenceId}</p>
+                                            <p><b>Make:</b>{" " + item.make}</p>
+                                            <p><b>Model:</b>{" " + item.model}</p>
+                                            <p><b>Colour:</b>{" " + item.colour}</p>
+                                            <p><b>Vehicle Registration No:</b>{" " + item.vehicleRegistrationNo}</p>
+                                        </div>                                            
+                                    ))}
 
                                     {this.state.vehicleLocationData.map((item) => (
-                                        <div style={{ borderTop: "3px dotted blue"}}>
-                                            <p><b>StreetName:</b>{item.streetName}</p>
-                                            <p><b>Latitude:</b>{item.latitude}</p>
-                                            <p><b>Longitude:</b>{item.longitude}</p>
-                                            <p><b>TimeStamp:</b>{item.timestamp}</p>
+                                        <div style={{ border: "3px dotted blue"}}>
+                                            <h6>Vehicle Location</h6>
+                                            <p><b>Vehicle Registration No:</b>{" " + item.vehicleRegistrationNo}</p>
+                                            <p><b>StreetName:</b>{" " + item.streetName}</p>
+                                            <p><b>Latitude:</b>{" " + item.latitude}</p>
+                                            <p><b>Longitude:</b>{" " + item.longitude}</p>
+                                            <p><b>TimeStamp:</b>{" " + item.timestamp}</p>
                                         </div>
                                     ))}
 
-                                </Modal.Body>
+                                </div>
                             </Tab>
 
                             <Tab eventKey="Associates" title="Associates">
                                 
                                     {this.state.associateData.map((item) => (
-                                    <Modal.Body className="modal-body">
-                                        <br></br>
-                                        <br></br>
+                                    <div className="div">
+
                                         <br></br>
                                         <p><b>Name: </b>{" " + item.forenames + " " + item.surname}</p>
                                         <p><b>Address: </b>{" " + item.address}</p>
@@ -256,16 +265,12 @@ export default class Individual extends Component {
                                         <p><b>Time: </b>{" " + item.timestamp}</p>
                                         <p><b>CallType: </b>{" " + item.callType}</p>
                                         <br></br>
-                                    </Modal.Body>
+                                    </div>
                                     ))}
 
                             </Tab>
 
                         </Tabs>
-
-                        <Modal.Title></Modal.Title>
-                    </Modal.Header>
-
 
                     <Modal.Footer className="modal-footer">
                         <Button variant="secondary" onClick={this.handleClose}>

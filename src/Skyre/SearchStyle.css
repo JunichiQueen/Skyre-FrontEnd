@@ -62,7 +62,7 @@ body {
 }
 
 .modal p {
-  width: 80px;
+  width: 400px;
   margin: 0 auto;
+  overflow: auto;
 }
-
