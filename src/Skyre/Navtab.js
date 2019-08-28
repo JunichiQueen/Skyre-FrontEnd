@@ -96,7 +96,7 @@ class NavTab extends Component {
 
         let toSend = "" + forenames + surname;
 
-        axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getBasicCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
@@ -121,7 +121,7 @@ class NavTab extends Component {
         let sex = "sex=" + e.target[6].value;
         let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
 
-        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getAdvCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
