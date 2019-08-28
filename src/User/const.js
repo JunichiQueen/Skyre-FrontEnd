@@ -2,7 +2,7 @@
 //const URL = `http://localhost:9003`;
 
 //swarm
-const URL = `/use`;
+const URL = `/user`;
 
 module.exports = {
     URL: URL
