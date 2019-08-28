@@ -155,10 +155,13 @@ class NavTab extends Component {
     }
 
     collectAllData = (forename, surname, address) => {
-        let appender = "forenames=" + forename + "&" + "surname=" + surname + "&" + "address=" + address + "&";
+
+        const username = "username=" + localStorage.getItem('username');
+
+        let appender = "forenames=" + forename + "&" + "surname=" + surname + "&" + "address=" + address + "&" + username;
         let collectedData = [];
 
-        const accessString = localStorage.getItem('JWT');
+        const accessString = localStorage.getItem('JWT');        
         
         axios
         .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
