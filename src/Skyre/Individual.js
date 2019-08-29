@@ -104,7 +104,7 @@ export default class Individual extends Component {
                 this.setState({
                     vehicleData: response.data
                 })
-                axios.get(`http://localhost:9003/scenario1/getVehicleLocation?${toSend}`, {
+                axios.get(`${URL.URL}/scenario1/getVehicleLocation?${toSend}`, {
                     headers: { Authorization: `JWT ${accessString}` },
                 })
                 .then(response => {
