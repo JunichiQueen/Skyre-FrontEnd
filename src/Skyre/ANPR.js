@@ -31,7 +31,7 @@ export default class ANPR extends Component {
 
         const accessString = localStorage.getItem('JWT');
 
-        axios.get("http://localhost:9003/scenario1/getCitizenFromRegistration?" + vehicleRegNo, {
+        axios.get(`${URL.URL}/scenario1/getCitizenFromRegistration?` + vehicleRegNo, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
