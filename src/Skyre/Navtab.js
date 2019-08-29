@@ -104,7 +104,7 @@ class NavTab extends Component {
 
         let toSend = "" + forenames + surname + username;
 
-        axios.get(`http://localhost:9003/scenario1/getBasicCitizens?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getBasicCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
@@ -139,7 +139,7 @@ class NavTab extends Component {
         let sex = "sex=" + e.target[6].value + "&";
         let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex + username;
 
-        axios.get(`http://localhost:9003/scenario1/getAdvCitizens?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getAdvCitizens?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             this.setState({
@@ -164,25 +164,25 @@ class NavTab extends Component {
         const accessString = localStorage.getItem('JWT');        
         
         axios
-        .get(`http://localhost:9003/scenario1/getBasicCitizens?${appender}`, {
+        .get(`${URL.URL}/scenario1/getBasicCitizens?${appender}`, {
                 headers: { Authorization: `JWT ${accessString}` },
             })
         .then(response => {
             collectedData.push(response.data[0]);
             axios
-            .get(`http://localhost:9003/scenario1/getFinance?${appender}`, {
+            .get(`${URL.URL}/scenario1/getFinance?${appender}`, {
             headers: { Authorization: `JWT ${accessString}` },
                 })
             .then(response => {
                 collectedData.push(response.data[0]);
                 axios
-                .get(`http://localhost:9003/scenario1/getMobile?${appender}`, {
+                .get(`${URL.URL}/scenario1/getMobile?${appender}`, {
                 headers: { Authorization: `JWT ${accessString}` },
                     })
                 .then(response => {
                     collectedData.push(response.data[0]);
                     axios
-                        .get(`http://localhost:9003/scenario1/getVehicle?${appender}`, {
+                        .get(`${URL.URL}/scenario1/getVehicle?${appender}`, {
                         headers: { Authorization: `JWT ${accessString}` },
                             })
                         .then(response => {
