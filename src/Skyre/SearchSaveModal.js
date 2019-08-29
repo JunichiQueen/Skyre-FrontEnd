@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, Tabs, Modal, Button, p } from 'react-bootstrap';
 import axios from 'axios';
 
-
+var URL = require('../User/const');
 
 export default class Individual extends Component {
     constructor(props) {
@@ -26,14 +26,14 @@ export default class Individual extends Component {
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
 
-        axios.get(`http://localhost:9003/scenario1/getFinance?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             let accountNumber = "accountNumber=" + response.data[0].accountNumber
             this.setState({
                 financeData: response.data
             })
-            axios.get(`http://localhost:9003/scenario1/getTransactions?${accountNumber}`, {
+            axios.get(`${URL.URL}/scenario1/getTransactions?${accountNumber}`, {
                 headers: { Authorization: `JWT ${accessString}`},
             }).then(response => {
                 this.setState({
@@ -53,14 +53,14 @@ export default class Individual extends Component {
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
 
-        axios.get(`http://localhost:9003/scenario1/getMobile?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         }).then(response => {
             let phoneNumber = "phoneNumber=" + response.data[0].phoneNumber
             this.setState({
                 mobileData: response.data
             })
-            axios.get(`http://localhost:9003/scenario1/getAssociates?${phoneNumber}`, {
+            axios.get(`${URL.URL}/scenario1/getAssociates?${phoneNumber}`, {
                 headers: { Authorization: `JWT ${accessString}`},
             }).then(response => {
                 this.setState({
@@ -83,7 +83,7 @@ export default class Individual extends Component {
         let surname = "surname=" + this.props.lastname + "&";
         let toSend = "" + forenames + surname;
 
-        axios.get(`http://localhost:9003/scenario1/getVehicle?${toSend}`, {
+        axios.get(`${URL.URL}/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
         })
             .then(response => {
@@ -91,7 +91,7 @@ export default class Individual extends Component {
                 this.setState({
                     vehicleData: response.data
                 })
-                axios.get(`http://localhost:9003/scenario1/getVehicleLocation?${vehicleRegistrationNo}`, {
+                axios.get(`${URL.URL}/scenario1/getVehicleLocation?${vehicleRegistrationNo}`, {
                     headers: { Authorization: `JWT ${accessString}` },
                 })
                 .then(response => {
