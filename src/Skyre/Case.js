@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import CaseIndividual from './CaseIndividual.js';
 
+var URL = require('../User/const');
+
 export default class Case extends Component {
     constructor(props){
         super();
@@ -17,7 +19,7 @@ export default class Case extends Component {
         const accessString = localStorage.getItem('JWT');
 
         axios
-        .get("http://localhost:9003/scenario1/getCases", {
+        .get("${URL.URL}/scenario1/getCases", {
             headers: { Authorization: `JWT ${accessString}` }, })
         .then(response => {
             this.setState({
@@ -49,7 +51,7 @@ export default class Case extends Component {
     //         associateName: name
     //     }
     //     axios
-    //     .post("http://localhost:8085/suspect/addAssociate", associate)
+    //     .post("http://case:8085/suspect/addAssociate", associate)
     //     .then(response => {
     //         this.getCase();
     //     })
@@ -84,7 +86,7 @@ export default class Case extends Component {
             colour: this.props.collectData[3].colour,
         }
         axios
-        .post(`http://localhost:9003/scenario1/postCase?${username}`, suspect, {
+        .post(`${URL.URL}/scenario1/postCase?${username}`, suspect, {
             headers: { Authorization: `JWT ${accessString}` }, })
         .then(response => {
             this.getCase();
