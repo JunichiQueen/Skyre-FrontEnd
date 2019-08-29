@@ -19,7 +19,7 @@ export default class Case extends Component {
         const accessString = localStorage.getItem('JWT');
 
         axios
-        .get("${URL.URL}/scenario1/getCases", {
+        .get(`${URL.URL}/scenario1/getCases`, {
             headers: { Authorization: `JWT ${accessString}` }, })
         .then(response => {
             this.setState({
