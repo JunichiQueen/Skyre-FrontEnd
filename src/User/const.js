@@ -1,5 +1,5 @@
 
-const URL = `http://localhost:9003`;
+const URL = `/user`;
 
 module.exports = {
     URL: URL
