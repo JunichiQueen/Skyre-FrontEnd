@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Spinner }  from 'reactstrap';
 import axios from 'axios';
 
+var URL = require('../User/const');
+
 export default class ANPR extends Component {
     constructor(){
         super();
