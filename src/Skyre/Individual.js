@@ -30,7 +30,9 @@ export default class Individual extends Component {
 
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname + username;
+        let homeAddress = "homeAddress=" + this.props.address + "&";
+        let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
+        let toSend = "" + forenames + surname + homeAddress + dateOfBirth + username;
 
         axios.get(`${URL.URL}/scenario1/getFinance?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
@@ -60,7 +62,9 @@ export default class Individual extends Component {
         
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname + username;
+        let homeAddress = "homeAddress=" + this.props.address + "&";
+        let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
+        let toSend = "" + forenames + surname + homeAddress + dateOfBirth + username;
 
         axios.get(`${URL.URL}/scenario1/getMobile?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
@@ -93,7 +97,9 @@ export default class Individual extends Component {
 
         let forenames = "forenames=" + this.props.firstname + "&";
         let surname = "surname=" + this.props.lastname + "&";
-        let toSend = "" + forenames + surname + username;
+        let homeAddress = "homeAddress=" + this.props.address + "&";
+        let dateOfBirth = "dateOfBirth=" + this.props.dateOfBirth + "&";
+        let toSend = "" + forenames + surname + homeAddress + dateOfBirth + username;
 
         axios.get(`${URL.URL}/scenario1/getVehicle?${toSend}`, {
             headers: { Authorization: `JWT ${accessString}` },
